@@ -1,0 +1,58 @@
+---
+
+import MainGridLayout from "../../layouts/MainGridLayout.astro";
+
+import { getEntry } from 'astro:content'
+import {i18n} from "../../i18n/translation";
+import I18nKey from "../../i18n/i18nKey";
+import Markdown from "../../components/misc/Markdown.astro";
+
+import MainGridLayout from "../../layouts/MainGridLayout.astro";
+import PostCard from "../../components/PostCard.astro";
+import Pagination from "../../components/control/Pagination.astro";
+import {getSortedPosts} from "../../utils/content-utils";
+import {getPostsByCategory} from "../../utils/content-utils";
+
+import {getPostUrlBySlug} from "../../utils/url-utils";
+import {PAGE_SIZE} from "../../constants/constants";
+import PostPage from "../../components/PostPage.astro";
+
+import MainGridLayout from "../../layouts/MainGridLayout.astro";
+
+import { getEntry } from 'astro:content'
+import {i18n} from "../../i18n/translation";
+import I18nKey from "../../i18n/i18nKey";
+import Markdown from "../../components/misc/Markdown.astro";
+
+const aboutPost = await getEntry('spec', 'about')
+
+const { Content } = await aboutPost.render()
+
+// export async function getStaticPaths({ paginate }) {
+//     const allBlogPosts = await getSortedPosts();
+//     return paginate(allBlogPosts, { pageSize: PAGE_SIZE });
+// }
+
+export async function getStaticPaths({ paginate }) {
+    const allBlogPosts = await getPostsByCategory("Examples");
+    return paginate(allBlogPosts, { pageSize: PAGE_SIZE });
+}
+
+const {page} = Astro.props;
+
+const len = page.data.length;
+
+---
+
+<MainGridLayout>
+    <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative min-h-32 mb-5">
+        <div class="card-base z-10 px-9 py-6 relative w-full ">
+            <Markdown class="mt-2">
+                <Content />
+            </Markdown>
+        </div>
+    </div>
+    <PostPage page={page}></PostPage>
+    <Pagination class="mx-auto onload-animation" page={page} style=`animation-delay: calc(var(--content-delay) + ${(len)*50}ms)`></Pagination>
+</MainGridLayout>
+

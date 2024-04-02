@@ -91,4 +91,7 @@ export default defineConfig({
       },
     },
   },
+  redirects: {
+    '/about': '/about/1'
+  },
 })

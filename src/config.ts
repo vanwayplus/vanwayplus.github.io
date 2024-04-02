@@ -7,7 +7,7 @@ import type {
 import { LinkPreset } from './types/config'
 
 export const siteConfig: SiteConfig = {
-  title: 'Fuwari',
+  title: 'Who is Evan',
   subtitle: 'Demo Site',
   lang: 'en',
   themeHue: 250,
@@ -20,36 +20,37 @@ export const siteConfig: SiteConfig = {
 export const navBarConfig: NavBarConfig = {
   links: [
     LinkPreset.Home,
+    LinkPreset.Photography,
     LinkPreset.Archive,
-    LinkPreset.About,
-    {
-      name: 'GitHub',
-      url: 'https://github.com/saicaca/fuwari',
-      external: true,
-    },
+
+    // {
+    //   name: 'GitHub',
+    //   url: 'https://github.com/saicaca/fuwari',
+    //   external: true,
+    // },
   ],
 }
 
 export const profileConfig: ProfileConfig = {
-  avatar: 'assets/images/demo-avatar.png',
-  name: 'Lorem Ipsum',
-  bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+  avatar: 'assets/images/ddm.png',
+  name: 'Evan',
+  bio: 'Who is Evan?',
   links: [
     {
-      name: 'Twitter',
-      icon: 'fa6-brands:twitter',
-      url: 'https://twitter.com',
-    },
-    {
-      name: 'Steam',
-      icon: 'fa6-brands:steam',
-      url: 'https://store.steampowered.com',
-    },
-    {
-      name: 'GitHub',
-      icon: 'fa6-brands:github',
-      url: 'https://github.com/saicaca/fuwari',
-    },
+      name: 'Mail',
+      icon: 'material-symbols:mail',
+      url: 'littlevanplus@gmail.com',
+    }
+    // {
+    //   name: 'Steam',
+    //   icon: 'fa6-brands:steam',
+    //   url: 'https://store.steampowered.com',
+    // },
+    // {
+    //   name: 'GitHub',
+    //   icon: 'fa6-brands:github',
+    //   url: 'https://github.com/saicaca/fuwari',
+    // },
   ],
 }
 

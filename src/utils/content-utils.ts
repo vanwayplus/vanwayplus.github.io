@@ -81,3 +81,29 @@ export async function getCategoryList(): Promise<Category[]> {
   }
   return ret
 }
+
+
+export async function getPostsByCategory(category: string | undefined) {
+  const allBlogPosts = await getCollection('posts', ({ data }) => {
+    // 首先判断是否在生产环境中忽略草稿，然后判断帖子的类别是否匹配
+    return (import.meta.env.PROD ? data.draft !== true : true) && data.category === category;
+  })
+  // 以下排序逻辑保持不变
+  const sorted = allBlogPosts.sort((a, b) => {
+    const dateA = new Date(a.data.published)
+    const dateB = new Date(b.data.published)
+    return dateA > dateB ? -1 : 1
+  })
+
+  // 为每个帖子添加 nextSlug 和 nextTitle 指向前一个帖子，prevSlug 和 prevTitle 指向后一个帖子
+  for (let i = 1; i < sorted.length; i++) {
+    sorted[i].data.nextSlug = sorted[i - 1].slug
+    sorted[i].data.nextTitle = sorted[i - 1].data.title
+  }
+  for (let i = 0; i < sorted.length - 1; i++) {
+    sorted[i].data.prevSlug = sorted[i + 1].slug
+    sorted[i].data.prevTitle = sorted[i + 1].data.title
+  }
+
+  return sorted;
+}

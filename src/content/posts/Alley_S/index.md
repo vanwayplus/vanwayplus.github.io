@@ -2,7 +2,7 @@
 title: Streets & Alleys around China
 published: 2023-01-10
 description: 'Some alley photos in China.'
-image: './huangshan.jpg'
+image: './xiamen1.jpg'
 tags: ['Photography', 'street', 'alley']
 category: 'Photography'
 draft: false 

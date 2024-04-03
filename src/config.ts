@@ -40,9 +40,9 @@ export const profileConfig: ProfileConfig = {
       name: 'Mail',
       icon: 'material-symbols:mail',
       url: 'mailto:littlevanplus@gmail.com',
-    }
+    },
     // {
-    //   name: 'Steam',
+    //   name: 'Xiaohongshu',
     //   icon: 'fa6-brands:steam',
     //   url: 'https://store.steampowered.com',
     // },
@@ -55,7 +55,7 @@ export const profileConfig: ProfileConfig = {
 }
 
 export const licenseConfig: LicenseConfig = {
-  enable: true,
+  enable: false,
   name: 'CC BY-NC-SA 4.0',
   url: 'https://creativecommons.org/licenses/by-nc-sa/4.0/',
 }

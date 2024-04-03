@@ -39,7 +39,7 @@ export const profileConfig: ProfileConfig = {
     {
       name: 'Mail',
       icon: 'material-symbols:mail',
-      url: 'littlevanplus@gmail.com',
+      url: 'mailto:littlevanplus@gmail.com',
     }
     // {
     //   name: 'Steam',

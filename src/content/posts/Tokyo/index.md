@@ -22,7 +22,7 @@ These are some photos I took in Tokyo, Japan. That was a really short trip, as a
 ## Sea
 ![Sea](./sea0.jpg)
 ## Alley
-![Tokyo](./xiangzi.jpg)
+![Tokyo](./Xiangzi.jpg)
 
 
 

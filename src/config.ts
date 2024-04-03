@@ -8,12 +8,12 @@ import { LinkPreset } from './types/config'
 
 export const siteConfig: SiteConfig = {
   title: 'Who is Evan',
-  subtitle: 'Demo Site',
+  subtitle: 'Welcome',
   lang: 'en',
   themeHue: 250,
   banner: {
     enable: false,
-    src: 'assets/images/demo-banner.png',
+    src: 'assets/images/banner.jpg',
   },
 }
 

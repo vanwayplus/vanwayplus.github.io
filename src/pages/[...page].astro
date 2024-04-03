@@ -26,7 +26,7 @@ const { Content } = await aboutPost.render()
 // }
 
 export async function getStaticPaths({ paginate }) {
-    const allBlogPosts = await getPostsByCategory("Examples");
+    const allBlogPosts = await getPostsByCategory("Research");
     return paginate(allBlogPosts, { pageSize: PAGE_SIZE });
 }
 

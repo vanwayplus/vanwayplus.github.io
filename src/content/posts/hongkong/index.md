@@ -2,7 +2,7 @@
 title: Hong Kong
 published: 2023-03-16
 description: 'Photography in Hong Kong'
-image: './best.jpg'
+image: './taxi1.jpg'
 tags: ['Photography', 'HongKong', 'City']
 category: 'Photography'
 draft: false 

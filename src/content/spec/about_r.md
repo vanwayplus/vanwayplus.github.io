@@ -13,7 +13,7 @@ Here is my journey:
 > - I'm going to work with Prof. Xinyu Zhang as a visiting scholar in University of California, San Diego
 > - I'm now working with Prof. Zhi-Li Zhang in University of Minnesota, Twin Cities
 > - Before I was a research assistant in Peking University, advised by Prof. Wenfei Wu
-> - At the very beginning, I worked in AIR Tsinghua University, advised by Prof. Yunxin Liu and Prof. Chunlin Li
+> - At the very beginning, I worked in AIR Tsinghua University, advised by Prof. Yunxin Liu and Prof. Yuanchun Li
 
 > ### work
 > - I worked in Apple Inc. as a data analyst intern

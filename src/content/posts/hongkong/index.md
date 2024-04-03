@@ -1,5 +1,5 @@
 ---
-title: hongkong
+title: Hong Kong
 published: 2023-03-16
 description: 'Photography in Hong Kong'
 image: './best.jpg'

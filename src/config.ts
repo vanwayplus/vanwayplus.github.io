@@ -32,9 +32,11 @@ export const navBarConfig: NavBarConfig = {
 }
 
 export const profileConfig: ProfileConfig = {
-  avatar: 'assets/images/ddm.png',
-  name: 'Evan',
-  bio: 'Who is Evan?',
+  avatar: 'assets/images/selfy.jpg',
+  name: 'Evan(Yufan) Wei',
+  bio: 'Luck drifts by like a whisper on the wind. | 运气来的若有似无  ',
+
+
   links: [
     {
       name: 'Mail',

@@ -3,7 +3,7 @@ title: iceland
 published: 2025-01-01
 description: 'Trip to Iceland'
 image: './aurora_0.jpg'
-tags: ['Photography', 'street', 'alley']
+tags: ['Photography', 'Iceland', 'Aurora', 'waterfalls']
 category: 'Photography'
 draft: false 
 ---
@@ -30,4 +30,11 @@ Inspired by Death Stranding, I've been expecting to visit Iceland for a long tim
 ![Roadside 0](./road_snow_0.jpg)
 ![Roadside 1](./road_snow_1.jpg)
 ![Roadside 2](./sun.jpg)
-```
+
+## Waterfall/river
+![Waterfall 0](./river.jpg)
+![Waterfall 1](./river_1.jpg)
+![Waterfall 2](./river_2.jpg)
+
+## Gyser
+![Gyser 0](./gyser.jpg)

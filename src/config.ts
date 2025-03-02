@@ -7,8 +7,8 @@ import type {
 import { LinkPreset } from './types/config'
 
 export const siteConfig: SiteConfig = {
-  title: 'Who is Evan',
-  subtitle: 'Welcome',
+  title: 'Evan Wei',
+  subtitle: 'Welcome to my personal website',
   lang: 'en',
   themeHue: 250,
   banner: {
@@ -32,7 +32,7 @@ export const navBarConfig: NavBarConfig = {
 }
 
 export const profileConfig: ProfileConfig = {
-  avatar: 'assets/images/selfy.jpg',
+  avatar: 'assets/images/emoji.jpg',
   name: 'Evan(Yufan) Wei',
   bio: 'Luck drifts by like a whisper on the wind. | 运气来的若有似无  ',
 

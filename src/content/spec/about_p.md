@@ -7,11 +7,12 @@ I'd love to share my journey with you.
 > - Tokyo, Japan
 > - Boston, USA
 > - Chicago, USA
-> - etc.
-
-> ### Upcoming Trip
 > - Taipei, China
 > - Singapore
 > - Seoul, Korea
+> - etc.
+
+> ### Upcoming Trip
+
 
 [//]: # (> - [Unsplash]&#40;https://unsplash.com/&#41;)

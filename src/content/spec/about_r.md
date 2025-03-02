@@ -10,9 +10,9 @@ Here is my journey:
 > - I'm looking for a Master/Ph.D. position in computer science
 > 
 > ### research journey
-> - I'm going to work with Prof. X Zhang as a visiting scholar in University of California, San Diego
-> - I'm now working with Prof.Z Zhang in University of Minnesota, Twin Cities
-> - Before I was a research assistant in Peking University, advised by Prof. W Wu
+> - I'm going to work with Prof. Xinyu Zhang as a visiting scholar in University of California, San Diego
+> - I'm now working with Prof. Zhili Zhang in University of Minnesota, Twin Cities
+> - Before I was a research assistant in Peking University, advised by Prof. Wenfei Wu
 > - At the very beginning, I worked in AIR Tsinghua University, advised by Prof. Y Liu and Prof. C Li
 
 > ### work

@@ -7,7 +7,7 @@ import type {
 import { LinkPreset } from './types/config'
 
 export const siteConfig: SiteConfig = {
-  title: 'Evan Wei',
+  title: 'Yufan Wei',
   subtitle: 'Welcome to my personal website',
   lang: 'en',
   themeHue: 250,
@@ -33,8 +33,8 @@ export const navBarConfig: NavBarConfig = {
 
 export const profileConfig: ProfileConfig = {
   avatar: 'assets/images/emoji.jpg',
-  name: 'Evan(Yufan) Wei',
-  bio: 'Luck drifts by like a whisper on the wind. | 运气来的若有似无  ',
+  name: 'Yufan(Evan) Wei',
+  bio: 'Easy come, easy go. | 运气来的若有似无',
 
 
   links: [
@@ -43,11 +43,11 @@ export const profileConfig: ProfileConfig = {
       icon: 'material-symbols:mail',
       url: 'mailto:littlevanplus@gmail.com',
     },
-    // {
-    //   name: 'Xiaohongshu',
-    //   icon: 'fa6-brands:steam',
-    //   url: 'https://store.steampowered.com',
-    // },
+    {
+      name: 'Linkedin',
+      icon: 'fa6-brands:linkedin',
+      url: 'www.linkedin.com/in/evan-way',
+    },
     // {
     //   name: 'GitHub',
     //   icon: 'fa6-brands:github',

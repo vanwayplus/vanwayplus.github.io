@@ -1,18 +1,13 @@
 # About me, as a student researcher 
-Hi there. \
-I am Evan, or Yufan Wei.\
-As a student researcher, I am interested in computer networks, mobile computing.\
+I am Yufan Wei, or just Evan.
 
-Here is my journey:
 > ### what's new
-> - I'm looking for a Ph.D. position in computer network / mobile computing
-> 
-> ### research journey
-> - I've worked with Prof. Xinyu Zhang as a visiting student in University of California, San Diego
-> - I'm now working with Prof.Zhi-Li Zhang in University of Minnesota, Twin Cities
-> - Before I was a research assistant in Peking University, advised by Prof. Wenfei Wu
+> - I am an incoming Ph.D. student in the ECE at the University of California, San Diego, advised by Prof. [Xinyu Zhang](https://xyzhang.ucsd.edu). And I am interested in GenAI + computer networks, mobile and wireless.
 
-[//]: # (> - At the very beginning, I worked in AIR Tsinghua University, advised by Prof. Y Liu and Prof. C Li)
+> ### research journey
+> - I've worked with Prof. [Xinyu Zhang](https://xyzhang.ucsd.edu) as a visiting student in University of California, San Diego at summer 2024.
+> - I'm working with Prof.[Zhi-Li Zhang](https://cse.umn.edu/cs/zhi-li-zhang) at University of Minnesota, Twin Cities from 2023.
+> - I was a research assistant at Peking University, advised by Prof. [Wenfei Wu](https://wenfei-wu.github.io).
 
 > ### work
 > - I worked in Apple Inc. as a data analyst intern

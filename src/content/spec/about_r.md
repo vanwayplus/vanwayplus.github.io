@@ -1,5 +1,7 @@
 # About me
-I am Yufan Wei, or just Evan.
+I am Yufan Wei, or just call me Evan.
+
+I am a research assistant(RA) at the [UMN Networking Research Group](https://networking.umn.edu/) led by [Prof. Zhi-Li Zhang](https://networking.umn.edu/our-team) @ University of Minnesota. Twin Cities.
 
 > ### What's New
 > - I am an incoming Ph.D. student at [Center for Wireless Communications](https://cwc.ucsd.edu/) at [University of California, San Diego](https://www.ece.ucsd.edu/), advised by Prof. [Xinyu Zhang](https://xyzhang.ucsd.edu). And I am interested in [GenAI + mobile].
@@ -17,7 +19,7 @@ I am Yufan Wei, or just Evan.
 > - I've been an intern advised by Prof. [Yuanchun Li](https://yuanchun-li.github.io/) at [AIR](https://air.tsinghua.edu.cn/en/)@[Tsinghua University](https://www.tsinghua.edu.cn/en/) in 2022.
 
 > ### Work Experience
-> - I've worked at **Apple Inc.** as a Data Analyst Intern
+> - I've worked at **Apple Inc.** at Beijing as a Data Analyst Intern in 2023
 
 
 [//]: # (> - [Unsplash]&#40;https://unsplash.com/&#41;)

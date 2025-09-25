@@ -3,7 +3,7 @@ title: Joshua Tree National Park
 published: 2025-06-19
 description: 'Joshua Tree National Park'
 image: './PANA4857.jpg'
-tags: ['Photography', 'Joshua', 'City']
+tags: ['Photography', 'Joshua', 'NationalPark']
 category: 'Photography'
 draft: false 
 ---

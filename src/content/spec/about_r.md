@@ -1,15 +1,24 @@
 # About me
 I am Yufan Wei, or saying Evan. 
 
-I am a first year Ph.D. student at [Center for Wireless Communications](https://cwc.ucsd.edu/) at [University of California, San Diego](https://www.ece.ucsd.edu/), advised by Prof. [Xinyu Zhang](https://xyzhang.ucsd.edu). And I am interested in [GenAI + mobile].
-And I was a research assistant(RA) at the [UMN Networking Research Group](https://networking.umn.edu/) led by [Prof. Zhi-Li Zhang](https://networking.umn.edu/our-team) @ University of Minnesota. Twin Cities.
+I am a first year Ph.D. student at [Center for Wireless Communications](https://cwc.ucsd.edu/) at [University of California, San Diego](https://www.ece.ucsd.edu/), advised by Prof. [Xinyu Zhang](https://xyzhang.ucsd.edu). And I am now working closely with Prof. Zhiting Hu's group. 
+ I was a research assistant(RA) at the [UMN Networking Research Group](https://networking.umn.edu/) led by [Prof. Zhi-Li Zhang](https://networking.umn.edu/our-team) @ University of Minnesota. Twin Cities.
+
+> ### Research Interests
+> - 3D scene reconstruction & generation
+> - Video Compression
+> - Memory in World Model
+> - Semantic Communication
+> - ...
+
 
 > ### What's New
-> - TBD
+> - Trilled to attend NeurIPS at San Diego!
 
 > ### Education
 > -  Ph.D. student, [University of California, San Diego](https://www.ece.ucsd.edu/), 2025-2030(hopefully o_O).
 > - B.A., Computer Science, [University of Minnesota, Twin Cities](https://cse.umn.edu/), 2023-2025.
+> - B.S.(transferred), Computer SCience, Beijing University of Posts and Telecom, 2020-2023.
 <!-- > - Transferred from [BUPT](https://www.bupt.edu.cn/#) in 2023. -->
 
 

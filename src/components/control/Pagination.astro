@@ -49,8 +49,14 @@ if (r == page.lastPage - 2)
 if (r < page.lastPage)
     pages.push(page.lastPage);
 
-const parts: string[] = page.url.current.split('/');
-const commonUrl: string = parts.slice(0, -1).join('/') + '/';
+let commonUrl: string;
+if (page.currentPage === 1) {
+    // On page 1, URL has no page number suffix, so current URL is the base
+    commonUrl = page.url.current.replace(/\/$/, '') + '/';
+} else {
+    const parts: string[] = page.url.current.split('/');
+    commonUrl = parts.slice(0, -1).join('/') + '/';
+}
 
 const getPageUrl = (p: number) => {
     if (p == 1)

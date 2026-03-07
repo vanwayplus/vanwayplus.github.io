@@ -15,7 +15,7 @@ const {published, tags, category, hideTagsForMobile} = Astro.props;
 const className = Astro.props.class;
 ---
 
-<div class:list={["flex flex-wrap text-neutral-500 dark:text-neutral-400 items-center gap-4 gap-x-4 gap-y-2", className]}>
+<div class:list={["flex flex-wrap text-neutral-500 dark:text-neutral-400 items-center gap-4 gap-x-5 gap-y-2", className]}>
     <!-- publish date -->
     <div class="flex items-center">
         <div class="meta-icon"
@@ -66,8 +66,8 @@ const className = Astro.props.class;
 
 @layer components {
     .meta-icon {
-        @apply w-8 h-8 transition rounded-md flex items-center justify-center bg-[var(--btn-regular-bg)]
-        text-[var(--btn-content)] mr-2
+        @apply transition flex items-center justify-center mr-1.5;
+        color: var(--btn-content);
     }
     .with-divider {
         @apply before:content-['/'] before:ml-1.5 before:mr-1.5 before:text-[var(--meta-divider)] before:text-sm

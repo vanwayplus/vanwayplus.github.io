@@ -1,12 +1,19 @@
 export function getDefaultHue(): number {
-  const fallback = '250'
+  const fallback = '40'
   const configCarrier = document.getElementById('config-carrier')
   return parseInt(configCarrier?.dataset.hue || fallback)
 }
 
 export function getHue(): number {
   const stored = localStorage.getItem('hue')
-  return stored ? parseInt(stored) : getDefaultHue()
+  if (!stored) return getDefaultHue()
+
+  const parsed = parseInt(stored)
+  if (Number.isNaN(parsed) || parsed === 30) {
+    return getDefaultHue()
+  }
+
+  return parsed
 }
 
 export function setHue(hue: number): void {

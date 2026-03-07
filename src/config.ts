@@ -10,7 +10,7 @@ export const siteConfig: SiteConfig = {
   title: 'Yufan Wei',
   subtitle: 'Welcome to my personal website',
   lang: 'en',
-  themeHue: 250,
+  themeHue: 40,
   banner: {
     enable: false,
     src: 'assets/images/banner.jpg',
@@ -22,12 +22,6 @@ export const navBarConfig: NavBarConfig = {
     LinkPreset.Home,
     LinkPreset.Photography,
     LinkPreset.Archive,
-
-    // {
-    //   name: 'GitHub',
-    //   url: 'https://github.com/saicaca/fuwari',
-    //   external: true,
-    // },
   ],
 }
 
@@ -35,8 +29,6 @@ export const profileConfig: ProfileConfig = {
   avatar: 'assets/images/emoji.jpg',
   name: 'Yufan(Evan) Wei',
   bio: 'Easy come, easy go. | 运气来的若有似无',
-
-
   links: [
     {
       name: 'Mail',
@@ -48,11 +40,6 @@ export const profileConfig: ProfileConfig = {
       icon: 'fa6-brands:linkedin',
       url: 'www.linkedin.com/in/evan-way',
     },
-    // {
-    //   name: 'GitHub',
-    //   icon: 'fa6-brands:github',
-    //   url: 'https://github.com/saicaca/fuwari',
-    // },
   ],
 }
 

@@ -26,59 +26,64 @@ const className = Astro.props.class;
 
 const hasCover = image !== undefined && image !== null && image !== '';
 
-const coverWidth = "28%";
+const coverWidth = "66%";
 
 const { remarkPluginFrontmatter } = await entry.render();
 
 ---
-<div class:list={["card-base flex flex-col-reverse md:flex-col w-full rounded-[var(--radius-large)] overflow-hidden relative", className]} style={style}>
-    <div class:list={["pl-6 md:pl-9 pr-6 md:pr-2 pt-6 md:pt-7 pb-6 relative", {"w-full md:w-[calc(100%_-_52px_-_12px)]": !hasCover, "w-full md:w-[calc(100%_-_var(--coverWidth)_-_12px)]": hasCover}]}>
+<article class:list={["editorial-post-card relative", className]} style={style}>
+    <div class:list={["editorial-post-copy", {"w-full md:w-[calc(100%_-_52px_-_12px)]": !hasCover, "w-full md:w-[calc(100%_-_var(--coverWidth)_-_1.75rem)]": hasCover}]}>
         <a href={url}
-           class="transition w-full block font-bold mb-3 text-3xl text-90
+           class="transition w-full block font-bold mb-3 text-[2.15rem] leading-[1.02] tracking-[-0.04em] text-90
         hover:text-[var(--primary)] dark:hover:text-[var(--primary)]
         active:text-[var(--title-active)] dark:active:text-[var(--title-active)]
-        before:w-1 before:h-5 before:rounded-md before:bg-[var(--primary)]
-        before:absolute before:top-[35px] before:left-[18px] before:hidden md:before:block
         ">
             {title}<Icon class="inline text-[var(--primary)] md:hidden -translate-y-[0.15rem]" name="material-symbols:chevron-right-rounded" size={28} ></Icon>
         </a>
 
         <!-- metadata -->
-        <PostMetadata published={published} tags={tags} category={category} hideTagsForMobile={true} class:list={{"mb-4": description, "mb-6": !description}}></PostMetadata>
+        <PostMetadata published={published} tags={tags} category={category} hideTagsForMobile={true} class:list={{"mb-4": description, "mb-5": !description}}></PostMetadata>
 
         <!-- description -->
-        <div class="transition text-75 mb-3.5">
+        <div class="transition text-75 mb-4 text-[1.02rem] leading-7 max-w-[36rem]">
             { description }
         </div>
 
         <!-- word count and read time  -->
-        <div class="text-sm text-black/30 dark:text-white/30 flex gap-4 transition">
+        <div class="text-sm tracking-[0.08em] uppercase text-black/35 dark:text-white/30 flex gap-3 transition">
             <div>{remarkPluginFrontmatter.words} {" " + i18n(I18nKey.wordsCount)}</div>
-            <div>|</div>
+            <div class="opacity-50">/</div>
             <div>{remarkPluginFrontmatter.minutes} {" " + i18n(I18nKey.minutesCount)}</div>
         </div>
 
     </div>
 
     {hasCover && <a href={url} aria-label={title}
-                    class:list={["group",
-                        "max-h-[20vh] md:max-h-none mx-4 mt-4 -mb-2 md:mb-0 md:mx-0 md:mt-0",
-                        "md:w-[var(--coverWidth)] relative md:absolute md:top-3 md:bottom-3 md:right-3 rounded-xl overflow-hidden active:scale-95"
+                    class:list={["group editorial-post-image",
+                        "max-h-[26vh] md:max-h-none mt-5 md:mt-0",
+                        "md:w-[var(--coverWidth)] relative md:absolute md:top-0 md:bottom-0 md:right-0 active:scale-[0.985]"
                     ]} >
-        <div class="absolute pointer-events-none z-10 w-full h-full group-hover:bg-black/30 group-active:bg-black/50 transition"></div>
-        <div class="absolute pointer-events-none z-20 w-full h-full flex items-center justify-center ">
-            <Icon name="material-symbols:chevron-right-rounded"
-                  class="transition opacity-0 group-hover:opacity-100 text-white text-5xl">
-            </Icon>
+        <div class="editorial-post-image-core">
+            <div class="editorial-post-image-echo-layer" aria-hidden="true">
+                <ImageWrapper src={image} basePath={path.join("content/posts/", getDir(entry.id))} alt=""
+                          class="w-full h-full editorial-post-image-echo">
+                </ImageWrapper>
+            </div>
+            <div class="absolute pointer-events-none z-10 w-full h-full group-hover:bg-black/20 group-active:bg-black/35 transition"></div>
+            <div class="absolute pointer-events-none z-20 w-full h-full flex items-center justify-center ">
+                <Icon name="material-symbols:chevron-right-rounded"
+                      class="transition opacity-0 group-hover:opacity-100 text-white text-4xl">
+                </Icon>
+            </div>
+            <ImageWrapper src={image} basePath={path.join("content/posts/", getDir(entry.id))} alt="Cover Image of the Post"
+                      class="w-full h-full editorial-post-image-media">
+            </ImageWrapper>
         </div>
-        <ImageWrapper src={image} basePath={path.join("content/posts/", getDir(entry.id))} alt="Cover Image of the Post"
-                  class="w-full h-full">
-        </ImageWrapper>
     </a>}
 
     {!hasCover &&
         <a href={url} aria-label={title} class="hidden md:flex btn-regular w-[3.25rem]
-         absolute right-3 top-3 bottom-3 rounded-xl bg-[var(--enter-btn-bg)]
+         absolute right-0 top-0 bottom-0 rounded-none bg-transparent
          hover:bg-[var(--enter-btn-bg-hover)] active:bg-[var(--enter-btn-bg-active)] active:scale-95
         ">
             <Icon name="material-symbols:chevron-right-rounded"
@@ -86,8 +91,94 @@ const { remarkPluginFrontmatter } = await entry.render();
             </Icon>
         </a>
     }
-</div>
-<div class="transition border-t-[1px] border-dashed mx-6 border-black/10 dark:border-white/[0.15] last:border-t-0 md:hidden"></div>
+</article>
 
-<style lang="stylus" define:vars={{coverWidth}}>
+<style lang="stylus" define:vars={{coverWidth}} is:global>
+  .editorial-post-card
+    position: relative
+    overflow: hidden
+    padding: 2.5rem 0
+    border-top: 1px solid rgba(0, 0, 0, 0.08)
+    &::before
+      content: ''
+      position: absolute
+      left: 0
+      right: 18%
+      top: 0
+      height: 9rem
+      pointer-events: none
+      background: linear-gradient(180deg, rgba(233, 185, 144, 0.04) 0%, rgba(233, 185, 144, 0.015) 28%, transparent 100%)
+    &:first-child
+      padding-top: 0.25rem
+      border-top: 0
+  .editorial-post-copy
+    position: relative
+    z-index: 2
+    padding-right: 0
+  .editorial-post-image
+    display: block
+    overflow: visible
+    isolation: isolate
+    z-index: 1
+  .editorial-post-image-core
+    position: relative
+    height: 100%
+    overflow: visible
+    border-radius: 0 !important
+    box-shadow: none
+  .editorial-post-image-echo-layer
+    position: absolute
+    inset: 0
+    left: -58%
+    z-index: 0
+    pointer-events: none
+  .editorial-post-image-echo
+    width: 100%
+    height: 100%
+  .editorial-post-image-echo > div:first-child
+    display: none
+  .editorial-post-image-echo img
+    width: 100%
+    height: 100%
+    object-fit: cover
+    object-position: center
+    transform: scale(1.08)
+    transform-origin: center center
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.12) 10%, rgba(0, 0, 0, 0.3) 22%, rgba(0, 0, 0, 0.56) 38%, rgba(0, 0, 0, 0.82) 56%, rgba(0, 0, 0, 1) 76%, rgba(0, 0, 0, 1) 100%)
+    mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.12) 10%, rgba(0, 0, 0, 0.3) 22%, rgba(0, 0, 0, 0.56) 38%, rgba(0, 0, 0, 0.82) 56%, rgba(0, 0, 0, 1) 76%, rgba(0, 0, 0, 1) 100%)
+  .editorial-post-image-core .editorial-post-image-media
+    position: relative
+    z-index: 1
+    width: 100%
+    height: 100%
+  .editorial-post-image-core img
+    width: 100%
+    height: 100%
+    object-fit: cover
+    object-position: center
+    border-radius: 0 !important
+  .editorial-post-image-media > div:first-child
+    display: none
+  .editorial-post-image-media img
+    -webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 0.06) 0%, rgba(0, 0, 0, 0.34) 10%, rgba(0, 0, 0, 0.7) 18%, rgba(0, 0, 0, 0.92) 28%, rgba(0, 0, 0, 1) 38%, rgba(0, 0, 0, 1) 100%)
+    mask-image: linear-gradient(to right, rgba(0, 0, 0, 0.06) 0%, rgba(0, 0, 0, 0.34) 10%, rgba(0, 0, 0, 0.7) 18%, rgba(0, 0, 0, 0.92) 28%, rgba(0, 0, 0, 1) 38%, rgba(0, 0, 0, 1) 100%)
+  :root.dark
+    .editorial-post-card
+      border-top-color: rgba(255, 255, 255, 0.08)
+      &::before
+        background: linear-gradient(180deg, rgba(160, 112, 70, 0.035) 0%, rgba(160, 112, 70, 0.012) 32%, transparent 100%)
+  @media (min-width: 768px)
+    .editorial-post-card
+      min-height: 17rem
+    .editorial-post-copy
+      padding-right: 1.75rem
+  @media (max-width: 767px)
+    .editorial-post-card
+      padding: 1.75rem 0
+    .editorial-post-image
+      overflow: hidden
+    .editorial-post-image-core
+      overflow: hidden
+    .editorial-post-image-echo-layer
+      left: 0
 </style>

@@ -20,36 +20,9 @@ const isHomePage = pathsEqual(Astro.url.pathname, '/');
 
 const testPathName = Astro.url.pathname;
 
-const anim = {
-	old: {
-		name: 'fadeIn',
-		duration: '4s',
-		easing: 'linear',
-		fillMode: 'forwards',
-		mixBlendMode: 'normal',
-	},
-	new: {
-		name: 'fadeOut',
-		duration: '4s',
-		easing: 'linear',
-		fillMode: 'backwards',
-		mixBlendMode: 'normal',
-	}
-};
-
-const myFade = {
-	forwards: anim,
-	backwards: anim,
-};
-
 // defines global css variables
 // why doing this in Layout instead of GlobalStyles: https://github.com/withastro/astro/issues/6728#issuecomment-1502203757
 const configHue = siteConfig.themeHue;
-if (!banner || typeof banner !== 'string' || banner.trim() === '') {
-	banner = siteConfig.banner.src;
-}
-
-// TODO don't use post cover as banner for now
 banner = siteConfig.banner.src;
 
 const enableBanner = siteConfig.banner.enable;
@@ -70,7 +43,7 @@ if (title) {
 		<title>{pageTitle}</title>
 
 		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description">
+		<meta name="description" content={pageTitle}>
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 		<link rel="icon" media="(prefers-color-scheme: light)" href="/favicon/favicon-light-32.png" sizes="32x32">
@@ -104,6 +77,87 @@ if (title) {
 	:root {
 		--hue: var(--configHue);
 		--page-width: 75rem;
+		--font-reading: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+		--font-display: "Avenir Next", "Segoe UI", "Helvetica Neue", sans-serif;
+	}
+	html,
+	body {
+		font-family: var(--font-display);
+	}
+	body {
+		background:
+			linear-gradient(180deg, oklch(0.988 0.006 calc(var(--hue) + 45)) 0%, oklch(0.968 0.010 calc(var(--hue) + 30)) 100%);
+		color: oklch(0.28 0.02 calc(var(--hue) + 8));
+	}
+	:root.dark body {
+		background:
+			linear-gradient(180deg, oklch(0.17 0.01 calc(var(--hue) + 12)) 0%, oklch(0.13 0.01 calc(var(--hue) + 4)) 100%);
+		color: rgba(246, 243, 238, 0.88);
+	}
+	body::before {
+		content: '';
+		position: fixed;
+		inset: 0;
+		z-index: -1;
+		pointer-events: none;
+		background:
+			radial-gradient(ellipse 78% 56% at 8% -6%, oklch(0.92 0.04 calc(var(--hue) + 4)) 0%, transparent 72%),
+			radial-gradient(ellipse 52% 40% at 100% 18%, oklch(0.96 0.02 220) 0%, transparent 76%);
+	}
+	:root.dark body::before {
+		background:
+			radial-gradient(ellipse 78% 56% at 8% -6%, oklch(0.30 0.05 calc(var(--hue) + 4)) 0%, transparent 70%),
+			radial-gradient(ellipse 52% 40% at 100% 18%, oklch(0.26 0.03 220) 0%, transparent 78%);
+	}
+	body::after {
+		content: '';
+		position: fixed;
+		left: 0;
+		right: 0;
+		top: 0;
+		height: min(26rem, 42vh);
+		z-index: -1;
+		pointer-events: none;
+		background:
+			linear-gradient(180deg, rgba(194, 141, 96, 0.15) 0%, rgba(194, 141, 96, 0.09) 28%, transparent 82%),
+			radial-gradient(80% 58% at 18% 0%, rgba(255, 244, 230, 0.45) 0%, transparent 76%),
+			radial-gradient(55% 42% at 82% 0%, rgba(255, 228, 205, 0.18) 0%, transparent 78%);
+		opacity: 0.9;
+	}
+	:root.dark body::after {
+		background:
+			linear-gradient(180deg, rgba(210, 145, 86, 0.10) 0%, rgba(210, 145, 86, 0.04) 32%, transparent 82%),
+			radial-gradient(80% 58% at 18% 0%, rgba(55, 43, 33, 0.45) 0%, transparent 74%),
+			radial-gradient(55% 42% at 82% 0%, rgba(58, 44, 34, 0.18) 0%, transparent 78%);
+		opacity: 0.95;
+	}
+	html[pathname^='/posts/'] body {
+		background:
+			linear-gradient(180deg, oklch(0.997 0.002 calc(var(--hue) + 48)) 0%, oklch(0.988 0.004 calc(var(--hue) + 42)) 100%);
+	}
+	html[pathname^='/posts/'] body::before {
+		background:
+			radial-gradient(ellipse 76% 54% at 8% -6%, rgba(255, 255, 255, 0.96) 0%, transparent 70%),
+			radial-gradient(ellipse 44% 34% at 100% 18%, rgba(252, 247, 241, 0.72) 0%, transparent 76%);
+	}
+	html[pathname^='/posts/'] body::after {
+		background:
+			linear-gradient(180deg, rgba(194, 141, 96, 0.07) 0%, rgba(194, 141, 96, 0.02) 24%, transparent 76%);
+		opacity: 0.6;
+	}
+	html.dark[pathname^='/posts/'] body {
+		background:
+			linear-gradient(180deg, oklch(0.16 0.01 calc(var(--hue) + 12)) 0%, oklch(0.12 0.01 calc(var(--hue) + 6)) 100%);
+	}
+	html.dark[pathname^='/posts/'] body::before {
+		background:
+			radial-gradient(ellipse 76% 54% at 8% -6%, rgba(38, 31, 24, 0.42) 0%, transparent 70%),
+			radial-gradient(ellipse 44% 34% at 100% 18%, rgba(34, 28, 24, 0.2) 0%, transparent 76%);
+	}
+	html.dark[pathname^='/posts/'] body::after {
+		background:
+			linear-gradient(180deg, rgba(210, 145, 86, 0.06) 0%, rgba(210, 145, 86, 0.02) 24%, transparent 76%);
+		opacity: 0.72;
 	}
 </style>
 <style is:global>
@@ -111,24 +165,9 @@ if (title) {
 @tailwind utilities;
 
 @layer components {
-	/* TODO: temporarily make banner height same for all pages since I cannot make the transition feel good
-		I want to make the height transition parallel with the content transition instead of blocking it
-	*/
-
-	/*
-	.enable-banner.is-home #banner-wrapper {
-		@apply h-[var(--banner-height)] md:h-[var(--banner-height-home)]
-	}
-	*/
 	.enable-banner #banner-wrapper {
 		@apply h-[var(--banner-height)]
 	}
-
-	/*
-	.enable-banner.is-home #top-row {
-		@apply h-[calc(var(--banner-height)_-_4.5rem)] md:h-[calc(var(--banner-height-home)_-_4.5rem)]
-	}
-	*/
 	.enable-banner #top-row {
 		@apply h-[calc(var(--banner-height)_-_4.5rem)]
 	}
@@ -136,55 +175,8 @@ if (title) {
 </style>
 <script>
 import 'overlayscrollbars/overlayscrollbars.css';
-import {
-	OverlayScrollbars,
-	ScrollbarsHidingPlugin,
-	SizeObserverPlugin,
-	ClickScrollPlugin
-} from 'overlayscrollbars';
+import { OverlayScrollbars } from 'overlayscrollbars';
 import {getHue, setHue} from "../utils/setting-utils";
-
-	/* Preload fonts */
-// (async function() {
-// 	try {
-// 		await Promise.all([
-// 			document.fonts.load("400 1em Roboto"),
-// 			document.fonts.load("700 1em Roboto"),
-// 		]);
-// 		document.body.classList.remove("hidden");
-// 	} catch (error) {
-// 		console.log("Failed to load fonts:", error);
-// 	}
-// })();
-
-/* TODO This is a temporary solution for style flicker issue when the transition is activated */
-/* issue link: https://github.com/withastro/astro/issues/8711, the solution get from here too */
-/* update: fixed in Astro 3.2.4 */
-function disableAnimation() {
-	const css = document.createElement('style')
-	css.appendChild(
-		document.createTextNode(
-			`*{
-              -webkit-transition:none!important;
-              -moz-transition:none!important;
-              -o-transition:none!important;
-              -ms-transition:none!important;
-              transition:none!important
-              }`
-		)
-	)
-	document.head.appendChild(css)
-
-	return () => {
-		// Force restyle
-		;(() => window.getComputedStyle(document.body))()
-
-		// Wait for next tick before removing
-		setTimeout(() => {
-			document.head.removeChild(css)
-		}, 1)
-	}
-}
 
 function setClickOutsideToClose(panel: string, ignores: string[]) {
 	document.addEventListener("click", event => {
@@ -260,7 +252,6 @@ function initCustomScrollbar() {
 }
 
 function init() {
-	// disableAnimation()()		// TODO
 	setBannerHeight();
 	loadTheme();
 	loadHue();
@@ -275,18 +266,6 @@ init();
 document.addEventListener('astro:after-swap', init);
 
 const setup = () => {
-	// TODO: temp solution to change the height of the banner
-/*
-	window.swup.hooks.on('animation:out:start', () => {
-		const path = window.location.pathname
-		const body = document.querySelector('body')
-		if (path[path.length - 1] === '/' && !body.classList.contains('is-home')) {
-			body.classList.add('is-home')
-		} else if (path[path.length - 1] !== '/' && body.classList.contains('is-home')) {
-			body.classList.remove('is-home')
-		}
-	})
-*/
 	// Remove the delay for the first time page load
 	window.swup.hooks.on('link:click', () => {
 		document.documentElement.style.setProperty('--content-delay', '0ms')

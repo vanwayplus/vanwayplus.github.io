@@ -71,6 +71,9 @@ dependencies:
   typescript:
     specifier: ^5.4.2
     version: 5.9.3
+  unist-util-visit:
+    specifier: ^5.1.0
+    version: 5.1.0
 
 devDependencies:
   '@astrojs/ts-plugin':

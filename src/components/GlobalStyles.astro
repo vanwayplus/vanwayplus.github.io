@@ -47,7 +47,7 @@ rainbow-light = linear-gradient(to right, oklch(0.80 0.10 0), oklch(0.80 0.10 30
 rainbow-dark = linear-gradient(to right, oklch(0.70 0.10 0), oklch(0.70 0.10 30), oklch(0.70 0.10 60), oklch(0.70 0.10 90), oklch(0.70 0.10 120), oklch(0.70 0.10 150), oklch(0.70 0.10 180), oklch(0.70 0.10 210), oklch(0.70 0.10 240), oklch(0.70 0.10 270), oklch(0.70 0.10 300), oklch(0.70 0.10 330), oklch(0.70 0.10 360))
 
 :root
-  --radius-large 1rem
+  --radius-large 0.95rem
 
   --banner-height-home 60vh
   --banner-height 40vh
@@ -56,8 +56,8 @@ rainbow-dark = linear-gradient(to right, oklch(0.70 0.10 0), oklch(0.70 0.10 30)
 
 color_set({
   --primary: oklch(0.70 0.14 var(--hue)) oklch(0.75 0.14 var(--hue))
-  --page-bg: oklch(0.95 0.01 var(--hue)) oklch(0.16 0.014 var(--hue))
-  --card-bg: white oklch(0.23 0.015 var(--hue))
+  --page-bg: oklch(0.985 0.008 calc(var(--hue) + 45)) oklch(0.18 0.012 var(--hue))
+  --card-bg: oklch(0.992 0.004 calc(var(--hue) + 30)) oklch(0.22 0.018 var(--hue))
 
   --btn-content: oklch(0.55 0.12 var(--hue)) oklch(0.75 0.1 var(--hue))
 
@@ -178,7 +178,25 @@ color_set({
 
 @layer components {
     .card-base {
-        @apply rounded-[var(--radius-large)] overflow-hidden bg-[var(--card-bg)] transition;
+        @apply rounded-[var(--radius-large)] overflow-hidden transition;
+        background: linear-gradient(180deg, rgba(255, 251, 246, 0.92), rgba(255, 255, 255, 0.78));
+        backdrop-filter: blur(18px) saturate(1.04);
+        -webkit-backdrop-filter: blur(18px) saturate(1.04);
+        border: 1px solid rgba(129, 98, 66, 0.10);
+        box-shadow:
+            0 22px 60px rgba(76, 50, 23, 0.08),
+            0 4px 14px rgba(76, 50, 23, 0.04);
+        will-change: transform;
+        transform: translateZ(0);
+    }
+    :root.dark .card-base {
+        background: linear-gradient(180deg, rgba(25, 28, 33, 0.82), rgba(16, 18, 22, 0.74));
+        backdrop-filter: blur(18px) saturate(1.02);
+        -webkit-backdrop-filter: blur(18px) saturate(1.02);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow:
+            0 20px 60px rgba(0, 0, 0, 0.30),
+            0 4px 12px rgba(0, 0, 0, 0.20);
     }
     h1, h2, h3, h4, h5, h6, p, a, span, li, ul, ol, blockquote, code, pre, table, th, td, strong {
         @apply transition;
@@ -193,7 +211,24 @@ color_set({
         @apply transition hover:bg-[var(--link-hover)] active:bg-[var(--link-active)] rounded-md p-1.5 -m-1.5;
     }
     .float-panel {
-        @apply top-[5.25rem] rounded-[var(--radius-large)] overflow-hidden bg-[var(--float-panel-bg)] transition shadow-xl dark:shadow-none
+        @apply top-[5.25rem] rounded-[var(--radius-large)] overflow-hidden transition;
+        background: linear-gradient(180deg, rgba(255, 251, 246, 0.94), rgba(255, 255, 255, 0.86));
+        backdrop-filter: blur(20px) saturate(1.05);
+        -webkit-backdrop-filter: blur(20px) saturate(1.05);
+        border: 1px solid rgba(129, 98, 66, 0.12);
+        box-shadow:
+            0 26px 70px rgba(76, 50, 23, 0.10),
+            0 4px 14px rgba(76, 50, 23, 0.05);
+        transform: translateZ(0);
+    }
+    :root.dark .float-panel {
+        background: linear-gradient(180deg, rgba(27, 31, 36, 0.90), rgba(18, 21, 25, 0.84));
+        backdrop-filter: blur(20px) saturate(1.02);
+        -webkit-backdrop-filter: blur(20px) saturate(1.02);
+        border: 1px solid rgba(255,255,255,0.08);
+        box-shadow:
+            0 26px 72px rgba(0,0,0,0.38),
+            0 4px 14px rgba(0,0,0,0.22);
     }
     .float-panel.closed {
         @apply top-[4.75rem] opacity-0 pointer-events-none

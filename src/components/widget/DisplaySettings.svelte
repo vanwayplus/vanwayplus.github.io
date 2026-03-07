@@ -1,14 +1,9 @@
 <script lang="ts">
 import {i18n} from '@i18n/translation';
 import I18nKey from '@i18n/i18nKey';
-import {getDefaultHue, getHue, setHue} from '@utils/setting-utils';
+import {getHue, setHue} from '@utils/setting-utils';
 
 let hue = getHue()
-const defaultHue = getDefaultHue()
-
-function resetHue() {
-    hue = getDefaultHue()
-}
 
 $: if (hue || hue === 0) {
     setHue(hue)
@@ -22,12 +17,6 @@ $: if (hue || hue === 0) {
             before:absolute before:-left-3 before:top-[0.33rem]"
         >
             {i18n(I18nKey.themeColor)}
-            <button aria-label="Reset to Default" class="btn-regular w-7 h-7 rounded-md  active:scale-90"
-                    class:opacity-0={hue === defaultHue} class:pointer-events-none={hue === defaultHue} on:click={resetHue}>
-                <div class="text-[var(--btn-content)]">
-                    <slot name="restore-icon"></slot>
-                </div>
-            </button>
         </div>
         <div class="flex gap-1">
             <div id="hueValue" class="transition bg-[var(--btn-regular-bg)] w-10 h-7 rounded-md flex justify-center

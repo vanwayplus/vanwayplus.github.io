@@ -1,16 +1,14 @@
 ---
 import { getCollection } from 'astro:content';
 import MainGridLayout from "@layouts/MainGridLayout.astro";
-import ImageWrapper from "../../components/misc/ImageWrapper.astro";
 import {Icon} from "astro-icon/components";
 import PostMetadata from "../../components/PostMeta.astro";
 import {i18n} from "@i18n/translation";
 import I18nKey from "@i18n/i18nKey";
-import {getDir, getPostUrlBySlug} from "@utils/url-utils";
+import {getPostUrlBySlug} from "@utils/url-utils";
 import License from "@components/misc/License.astro";
 import {licenseConfig} from "src/config";
 import Markdown from "@components/misc/Markdown.astro";
-import path from "path";
 
 export async function getStaticPaths() {
     const blogEntries = await getCollection('posts', ({ data }) => {
@@ -23,99 +21,257 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content } = await entry.render();
-
 const { remarkPluginFrontmatter } = await entry.render();
+const description = entry.data.description?.trim();
+const showDescription = description && description.toLowerCase() !== entry.data.title.trim().toLowerCase();
 
 ---
 <MainGridLayout banner={entry.data.image} title={entry.data.title}>
-    <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative mb-4">
-        <div id="post-container" class:list={["card-base z-10 px-6 md:px-9 pt-6 pb-4 relative w-full ",
-            {}
-        ]}>
-            <!-- word count and reading time -->
-            <div class="flex flex-row text-black/30 dark:text-white/30 gap-5 mb-3 transition onload-animation">
-                <div class="flex flex-row items-center">
-                    <div class="transition h-6 w-6 rounded-md bg-black/5 dark:bg-white/10 text-black/50 dark:text-white/50 flex items-center justify-center mr-2">
-                        <Icon name="material-symbols:notes-rounded"></Icon>
-                    </div>
-                    <div class="text-sm">{remarkPluginFrontmatter.words} {" " + i18n(I18nKey.wordsCount)}</div>
-                </div>
-                <div class="flex flex-row items-center">
-                    <div class="transition h-6 w-6 rounded-md bg-black/5 dark:bg-white/10 text-black/50 dark:text-white/50 flex items-center justify-center mr-2">
-                        <Icon name="material-symbols:schedule-outline-rounded"></Icon>
-                    </div>
-                    <div class="text-sm">{remarkPluginFrontmatter.minutes} {" " + i18n(I18nKey.minutesCount)}</div>
-                </div>
-            </div>
-
-            <!-- title -->
-            <div class="relative onload-animation">
-                <div
+    <article id="post-container" class="post-shell relative mb-5 w-full">
+        <div class="post-shell-inner">
+            <header class="post-header onload-animation">
+                <div class="post-eyebrow">{entry.data.category || "Story"}</div>
+                <h1
                     data-pagefind-body data-pagefind-weight="10" data-pagefind-meta="title"
-                    class="transition w-full block font-bold mb-3
-                    text-3xl md:text-[2.5rem]/[2.75rem]
-                    text-black/90 dark:text-white/90
-                    md:before:w-1 before:h-5 before:rounded-md before:bg-[var(--primary)]
-                    before:absolute before:top-[0.75rem] before:left-[-1.125rem]
-                ">
+                    class="post-title"
+                >
                     {entry.data.title}
+                </h1>
+                {showDescription && <p class="post-dek">{description}</p>}
+                <div class="post-facts">
+                    <div class="post-fact">
+                        <Icon name="material-symbols:notes-rounded"></Icon>
+                        <span>{remarkPluginFrontmatter.words} {" " + i18n(I18nKey.wordsCount)}</span>
+                    </div>
+                    <div class="post-fact">
+                        <Icon name="material-symbols:schedule-outline-rounded"></Icon>
+                        <span>{remarkPluginFrontmatter.minutes} {" " + i18n(I18nKey.minutesCount)}</span>
+                    </div>
                 </div>
-            </div>
-
-            <!-- metadata -->
-            <div class="onload-animation">
                 <PostMetadata
-                        class="mb-5"
-                        published={entry.data.published}
-                        tags={entry.data.tags}
-                        category={entry.data.category}
+                    class="post-meta"
+                    published={entry.data.published}
+                    tags={entry.data.tags}
+                    category={entry.data.category}
                 ></PostMetadata>
-                {!entry.data.image && <div class="border-[var(--line-divider)] border-dashed border-b-[1px] mb-5"></div>}
-            </div>
+            </header>
 
-            <!-- always show cover as long as it has one -->
-
-            {entry.data.image &&
-                <ImageWrapper src={entry.data.image} basePath={path.join("content/posts/", getDir(entry.id))} class="mb-8 rounded-xl banner-container onload-animation"/>
-            }
-
+            <div class="post-divider onload-animation"></div>
 
             <Markdown class="mb-6 markdown-content onload-animation">
                 <Content />
             </Markdown>
 
-            {licenseConfig.enable && <License title={entry.data.title} slug={entry.slug} pubDate={entry.data.published} class="mb-6 rounded-xl license-container onload-animation"></License>}
-
+            {licenseConfig.enable && <License title={entry.data.title} slug={entry.slug} pubDate={entry.data.published} class="mb-6 license-container onload-animation"></License>}
         </div>
-    </div>
+    </article>
 
-    <div class="flex flex-col md:flex-row justify-between mb-4 gap-4 overflow-hidden w-full">
-        <a href={getPostUrlBySlug(entry.data.nextSlug)} class="w-full font-bold overflow-hidden active:scale-95">
-            {entry.data.nextSlug && <div class="btn-card rounded-2xl w-full h-[3.75rem] max-w-full px-4 flex items-center justify-start gap-4" >
-                <Icon name="material-symbols:chevron-left-rounded" size={32} class="text-[var(--primary)]" />
-                <div class="overflow-hidden transition overflow-ellipsis whitespace-nowrap max-w-[calc(100%_-_3rem)] text-black/75 dark:text-white/75">
-                    {entry.data.nextTitle}
+    <div class="post-pagination">
+        <a href={getPostUrlBySlug(entry.data.nextSlug)} class="post-pagination-link post-pagination-prev">
+            {entry.data.nextSlug && <>
+                <div class="post-pagination-label">Previous</div>
+                <div class="post-pagination-title">
+                    <Icon name="material-symbols:chevron-left-rounded" size={28} class="text-[var(--primary)]" />
+                    <span>{entry.data.nextTitle}</span>
                 </div>
-            </div>}
+            </>}
         </a>
 
-        <a href={getPostUrlBySlug(entry.data.prevSlug)} class="w-full font-bold overflow-hidden active:scale-95">
-            {entry.data.prevSlug && <div class="btn-card rounded-2xl w-full h-[3.75rem] max-w-full px-4 flex items-center justify-end gap-4">
-                <div class="overflow-hidden transition overflow-ellipsis whitespace-nowrap max-w-[calc(100%_-_3rem)] text-black/75 dark:text-white/75">
-                    {entry.data.prevTitle}
+        <a href={getPostUrlBySlug(entry.data.prevSlug)} class="post-pagination-link post-pagination-next">
+            {entry.data.prevSlug && <>
+                <div class="post-pagination-label">Next</div>
+                <div class="post-pagination-title">
+                    <span>{entry.data.prevTitle}</span>
+                    <Icon name="material-symbols:chevron-right-rounded" size={28} class="text-[var(--primary)]" />
                 </div>
-                <Icon name="material-symbols:chevron-right-rounded" size={32} class="text-[var(--primary)]" />
-            </div>}
+            </>}
         </a>
     </div>
 
 </MainGridLayout>
 
 <style is:global>
-#post-container :nth-child(1) { animation-delay: calc(var(--content-delay) + 0ms) }
-#post-container :nth-child(2) { animation-delay: calc(var(--content-delay) + 50ms) }
-#post-container :nth-child(3) { animation-delay: calc(var(--content-delay) + 100ms) }
-#post-container :nth-child(4) { animation-delay: calc(var(--content-delay) + 175ms) }
-#post-container :nth-child(5) { animation-delay: calc(var(--content-delay) + 250ms) }
-#post-container :nth-child(6) { animation-delay: calc(var(--content-delay) + 325ms) }
+.post-shell {
+    position: relative;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.96);
+    border: 1px solid rgba(26, 22, 18, 0.08);
+    border-radius: 0;
+    box-shadow: 0 24px 72px rgba(26, 22, 18, 0.05);
+}
+.post-shell::before {
+    content: "";
+    position: absolute;
+    left: clamp(1.6rem, 4vw, 3rem);
+    top: clamp(1.55rem, 3vw, 2.4rem);
+    width: clamp(3.5rem, 8vw, 5rem);
+    height: 0.22rem;
+    background: linear-gradient(90deg, rgba(210, 126, 71, 0.96) 0%, rgba(210, 126, 71, 0.25) 74%, rgba(210, 126, 71, 0) 100%);
+    pointer-events: none;
+}
+.post-shell::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(210, 126, 71, 0.025) 0%, rgba(255, 255, 255, 0) 18%);
+    pointer-events: none;
+}
+html.dark .post-shell {
+    background: rgba(18, 21, 25, 0.92);
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 26px 76px rgba(0, 0, 0, 0.26);
+}
+html.dark .post-shell::before {
+    background: linear-gradient(90deg, rgba(214, 148, 86, 0.92) 0%, rgba(214, 148, 86, 0.22) 74%, rgba(214, 148, 86, 0) 100%);
+}
+html.dark .post-shell::after {
+    background: linear-gradient(180deg, rgba(214, 148, 86, 0.04) 0%, rgba(18, 21, 25, 0) 22%);
+}
+.post-shell-inner {
+    position: relative;
+    z-index: 1;
+    padding: clamp(2.35rem, 5vw, 4rem) clamp(1.5rem, 4vw, 3.2rem) clamp(2.3rem, 5vw, 3.4rem);
+}
+.post-header,
+.post-divider,
+#post-container .markdown-content,
+#post-container .license-container {
+    animation-delay: calc(var(--content-delay) + 0ms);
+}
+.post-header {
+    max-width: 49rem;
+}
+.post-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.15rem;
+    color: var(--primary);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+}
+.post-title {
+    margin: 0;
+    max-width: 13ch;
+    font-family: var(--font-display);
+    font-size: clamp(2.35rem, 7vw, 4.9rem);
+    line-height: 0.94;
+    letter-spacing: -0.05em;
+    color: rgba(15, 14, 12, 0.92);
+}
+:root.dark .post-title {
+    color: rgba(248, 245, 240, 0.94);
+}
+.post-dek {
+    margin: 1.25rem 0 0;
+    max-width: 40rem;
+    font-size: clamp(1rem, 2vw, 1.18rem);
+    line-height: 1.75;
+    color: rgba(44, 37, 31, 0.64);
+}
+:root.dark .post-dek {
+    color: rgba(236, 232, 226, 0.66);
+}
+.post-facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+    margin-top: 1.5rem;
+}
+.post-fact {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    color: rgba(44, 37, 31, 0.62);
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+:root.dark .post-fact {
+    color: rgba(236, 232, 226, 0.64);
+}
+.post-fact svg {
+    color: var(--primary);
+}
+.post-meta {
+    margin-top: 1.4rem;
+}
+.post-divider {
+    margin: 2rem 0 2.25rem;
+    border-top: 1px solid rgba(26, 22, 18, 0.08);
+}
+html.dark .post-divider {
+    border-top-color: rgba(255, 255, 255, 0.08);
+}
+.license-container {
+    border-radius: 0 !important;
+    background: rgba(247, 244, 239, 0.9);
+    border: 1px solid rgba(26, 22, 18, 0.07);
+}
+html.dark .license-container {
+    background: rgba(24, 27, 31, 0.92);
+    border-color: rgba(255, 255, 255, 0.08);
+}
+.post-pagination {
+    display: grid;
+    gap: 1.25rem;
+    margin-bottom: 1rem;
+    padding-top: 0.5rem;
+}
+.post-pagination-link {
+    display: block;
+    min-height: 4.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(129, 98, 66, 0.12);
+}
+.post-pagination-label {
+    margin-bottom: 0.45rem;
+    color: rgba(44, 37, 31, 0.42);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+}
+.post-pagination-title {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: rgba(22, 19, 16, 0.82);
+    font-size: 1.05rem;
+    font-weight: 600;
+    line-height: 1.5;
+    transition: color 150ms ease;
+}
+.post-pagination-link:hover .post-pagination-title {
+    color: var(--primary);
+}
+.post-pagination-next .post-pagination-title {
+    justify-content: flex-end;
+    text-align: right;
+}
+:root.dark .post-pagination-link {
+    border-top-color: rgba(255, 255, 255, 0.08);
+}
+:root.dark .post-pagination-label {
+    color: rgba(236, 232, 226, 0.42);
+}
+:root.dark .post-pagination-title {
+    color: rgba(246, 242, 236, 0.82);
+}
+@media (max-width: 767px) {
+    .post-shell-inner {
+        padding: 2rem 1.25rem 2.2rem;
+    }
+    .post-title {
+        max-width: none;
+    }
+}
+@media (min-width: 768px) {
+    .post-pagination {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 2rem;
+    }
+}
 </style>

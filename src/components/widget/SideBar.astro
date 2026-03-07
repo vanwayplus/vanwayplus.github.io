@@ -4,13 +4,70 @@ import Tag from "./Tags.astro";
 import Categories from "./Categories.astro";
 
 const className = Astro.props.class;
+const showMap = Astro.url.pathname === "/";
 ---
 <div id="sidebar" class:list={[className, "w-full"]}>
     <div class="flex flex-col w-full gap-4 mb-4">
         <Profile></Profile>
     </div>
-    <div class="flex flex-col w-full gap-4 top-4 sticky top-4">
-        <Categories class="onload-animation" style="animation-delay: 150ms"></Categories>
-        <Tag class="onload-animation" style="animation-delay: 200ms"></Tag>
+    <div class="flex flex-col w-full gap-4 sticky top-24">
+        {showMap && <div class="visitor-map-shell onload-animation" style="animation-delay: 150ms">
+            <div class="visitor-map-frame" data-clustrmaps-root>
+            </div>
+        </div>}
+        <Categories class="onload-animation" style={`animation-delay: ${showMap ? 200 : 150}ms`}></Categories>
+        <Tag class="onload-animation" style={`animation-delay: ${showMap ? 250 : 200}ms`}></Tag>
     </div>
 </div>
+
+<style>
+    .visitor-map-shell {
+        padding-top: 1rem;
+        padding-bottom: 0.25rem;
+        border-top: 1px solid rgba(0, 0, 0, 0.08);
+    }
+
+    .visitor-map-frame {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        min-height: 258px;
+        padding: 0.9rem 0.7rem 0.35rem;
+        background: linear-gradient(180deg, rgba(255, 250, 244, 0.96), rgba(255, 255, 255, 0.88));
+        border: 1px solid rgba(138, 119, 104, 0.10);
+        box-shadow: 0 12px 28px rgba(83, 60, 38, 0.05);
+    }
+
+    :root.dark .visitor-map-shell {
+        border-top-color: rgba(255, 255, 255, 0.08);
+    }
+
+    :root.dark .visitor-map-frame {
+        background: linear-gradient(180deg, rgba(39, 34, 29, 0.92), rgba(28, 24, 21, 0.88));
+        border-color: rgba(255, 255, 255, 0.08);
+        box-shadow: 0 14px 32px rgba(0, 0, 0, 0.20);
+    }
+</style>
+
+<script is:inline>
+    const CLUSTRMAPS_SRC = 'https://cdn.clustrmaps.com/map_v2.js?cl=c8a58a&w=300&t=n&d=d1AabU7bjarD4xrVxiDeV2D2OX7NplccU1Iy2xgegc8&co=faf7f2&cmo=c88759&cmn=eed7c6&ct=8a7768';
+
+    function mountClustrMap() {
+        const host = document.querySelector('[data-clustrmaps-root]');
+        if (!host) return;
+        host.innerHTML = '';
+
+        const script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.id = 'clustrmaps';
+        script.src = CLUSTRMAPS_SRC;
+        host.appendChild(script);
+    }
+
+    mountClustrMap();
+    if (!window.__clustrmapsMountedHook) {
+        document.addEventListener('astro:after-swap', mountClustrMap);
+        window.__clustrmapsMountedHook = true;
+    }
+</script>

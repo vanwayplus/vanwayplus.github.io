@@ -8,6 +8,7 @@ import rehypeKatex from "rehype-katex"
 import rehypeSlug from "rehype-slug"
 import remarkMath from "remark-math"
 import { remarkReadingTime } from "./src/plugins/remark-reading-time.mjs"
+import { rehypeLazyImages } from "./src/plugins/rehype-lazy-images.mjs"
 import svelte from "@astrojs/svelte"
 import swup from '@swup/astro';
 
@@ -54,6 +55,7 @@ export default defineConfig({
     remarkPlugins: [remarkMath, remarkReadingTime],
     rehypePlugins: [
       rehypeKatex,
+      rehypeLazyImages,
       rehypeSlug,
       [
         rehypeAutolinkHeadings,
@@ -91,7 +93,4 @@ export default defineConfig({
       },
     },
   },
-  // redirects: {
-  //   '/about': '/about/1'
-  // },
 })

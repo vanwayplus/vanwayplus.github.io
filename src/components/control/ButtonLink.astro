@@ -4,40 +4,15 @@ interface Props {
     url?: string
     label?: string
 }
-const { badge, url, name } = Astro.props
+const { badge, url, label } = Astro.props
 ---
-<a href={url} aria-label={name}>
-    <button
-        class:list={`
-            w-full
-            h-10
-            rounded-lg
-            bg-none
-            hover:bg-[var(--btn-plain-bg-hover)]
-            active:bg-[var(--btn-plain-bg-active)]
-            transition-all
-            pl-2
-            hover:pl-3
-            
-            text-neutral-700
-            hover:text-[var(--primary)]
-            dark:text-neutral-300
-            dark:hover:text-[var(--primary)]
-        `
-        }
-    >
-        <div class="flex items-center justify-between relative mr-2">
-            <div class="overflow-hidden text-left whitespace-nowrap overflow-ellipsis  ">
-                <slot></slot>
-            </div>
-            { badge !== undefined && badge !== null && badge !== '' &&
-                <div class="transition h-7 ml-4 min-w-[2rem] rounded-lg text-sm font-bold
-                    text-[var(--btn-content)] dark:text-[var(--deep-text)]
-                    bg-[oklch(0.95_0.025_var(--hue))] dark:bg-[var(--primary)]
-                    flex items-center justify-center">
-                    { badge }
-                </div>
-            }
+<a href={url} aria-label={label} class="group flex items-center justify-between gap-4 py-2.5 border-b border-black/5 dark:border-white/[0.06] last:border-b-0">
+    <div class="overflow-hidden text-left whitespace-nowrap overflow-ellipsis text-black/70 dark:text-white/70 transition group-hover:text-[var(--primary)]">
+        <slot></slot>
+    </div>
+    { badge !== undefined && badge !== null && badge !== '' &&
+        <div class="text-[0.72rem] font-semibold tracking-[0.18em] text-black/35 dark:text-white/35 transition group-hover:text-[var(--primary)]">
+            { badge }
         </div>
-    </button>
+    }
 </a>

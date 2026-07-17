@@ -8,7 +8,7 @@ let delay = 0
 const interval = 50
 ---
 <div class="transition flex flex-col gap-4 mb-8">
-    {page.data.map((entry: { data: { draft: boolean; title: string; tags: string[]; category: string; published: Date; image: string; description: string; coverFit?: 'cover' | 'contain'; }; slug: string; }) => {
+    {page.data.map((entry: { data: { draft: boolean; title: string; tags: string[]; category: string; published: Date; image: string; description: string; coverFit?: 'cover' | 'contain'; hideDate?: boolean; }; slug: string; }) => {
         return (
             <PostCard
                     entry={entry}
@@ -19,6 +19,7 @@ const interval = 50
                     url={getPostUrlBySlug(entry.slug)}
                     image={entry.data.image}
                     coverFit={entry.data.coverFit}
+                    hideDate={entry.data.hideDate}
                     description={entry.data.description}
                     draft={entry.data.draft}
                     class:list="onload-animation"

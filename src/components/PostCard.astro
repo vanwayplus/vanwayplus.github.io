@@ -16,169 +16,125 @@ interface Props {
     tags: string[];
     category: string;
     image: string;
+    coverFit: 'cover' | 'contain';
     description: string;
     words: number;
     draft: boolean;
     style: string;
 }
-const { entry, title, url, published, tags, category, image, description, words, style } = Astro.props;
+const { entry, title, url, published, tags, category, image, coverFit, description, style } = Astro.props;
 const className = Astro.props.class;
 
 const hasCover = image !== undefined && image !== null && image !== '';
+// Wide figures/diagrams (coverFit: contain) render as a full-width top banner at
+// their natural aspect ratio — shown whole, never cropped or shrunk into a slot.
+const bannerMode = hasCover && coverFit === 'contain';
+// Everything else uses a side thumbnail that fills its frame (best for photos).
+const sideCover = hasCover && !bannerMode;
 
-const coverWidth = "66%";
+const basePath = path.join("content/posts/", getDir(entry.id));
+
+// Cap the tags shown on the (narrow) card so the meta row stays on one line;
+// the full tag list still appears on the post detail page.
+const cardTags = Array.isArray(tags) ? tags.slice(0, 3) : tags;
 
 const { remarkPluginFrontmatter } = await entry.render();
-
 ---
-<article class:list={["editorial-post-card relative", className]} style={style}>
-    <div class:list={["editorial-post-copy", {"w-full md:w-[calc(100%_-_52px_-_12px)]": !hasCover, "w-full md:w-[calc(100%_-_var(--coverWidth)_-_1.75rem)]": hasCover}]}>
+<article class:list={["post-card card-base w-full",
+    bannerMode ? "flex flex-col" : "flex flex-col-reverse md:flex-row", className]} style={style}>
+
+    {bannerMode &&
+        <a href={url} aria-label={title} class="post-card-banner group relative block w-full overflow-hidden">
+            <ImageWrapper src={image} basePath={basePath} alt={`Figure for ${title}`}
+                          class="post-card-banner-img w-full"></ImageWrapper>
+            <div class="absolute inset-0 z-10 transition group-hover:bg-black/[0.06] group-active:bg-black/10 pointer-events-none"></div>
+        </a>
+    }
+
+    <div class="post-card-body flex flex-col justify-center grow px-6 py-6 md:px-7 md:py-7">
         <a href={url}
-           class="transition w-full block font-bold mb-3 text-[2.15rem] leading-[1.02] tracking-[-0.04em] text-90
-        hover:text-[var(--primary)] dark:hover:text-[var(--primary)]
-        active:text-[var(--title-active)] dark:active:text-[var(--title-active)]
-        ">
-            {title}<Icon class="inline text-[var(--primary)] md:hidden -translate-y-[0.15rem]" name="material-symbols:chevron-right-rounded" size={28} ></Icon>
+           class="post-card-title transition block font-bold text-[1.5rem] md:text-[1.65rem] leading-[1.12] tracking-[-0.02em] text-90
+           hover:text-[var(--primary)] dark:hover:text-[var(--primary)]
+           active:text-[var(--title-active)] dark:active:text-[var(--title-active)]">
+            {title}
         </a>
 
-        <!-- metadata -->
-        <PostMetadata published={published} tags={tags} category={category} hideTagsForMobile={true} class:list={{"mb-4": description, "mb-5": !description}}></PostMetadata>
+        <PostMetadata published={published} tags={cardTags} category={category} hideTagsForMobile={true} class="mt-3 mb-3.5"></PostMetadata>
 
-        <!-- description -->
-        <div class="transition text-75 mb-4 text-[1.02rem] leading-7 max-w-[36rem]">
-            { description }
+        {description && <div class="post-card-desc transition text-75 text-[0.98rem] leading-7">{description}</div>}
+
+        <div class="post-card-footer mt-4 flex items-center gap-3 text-xs tracking-[0.08em] uppercase text-30">
+            <span>{remarkPluginFrontmatter.words} {i18n(I18nKey.wordsCount)}</span>
+            <span class="opacity-40">/</span>
+            <span>{remarkPluginFrontmatter.minutes} {i18n(I18nKey.minutesCount)}</span>
+            <span class="post-card-readmore ml-auto hidden md:inline-flex items-center gap-1 text-[var(--primary)] font-semibold normal-case tracking-normal text-sm">
+                Read
+                <Icon name="material-symbols:arrow-forward-rounded" size={17} class="post-card-arrow-icon transition"></Icon>
+            </span>
         </div>
-
-        <!-- word count and read time  -->
-        <div class="text-sm tracking-[0.08em] uppercase text-black/35 dark:text-white/30 flex gap-3 transition">
-            <div>{remarkPluginFrontmatter.words} {" " + i18n(I18nKey.wordsCount)}</div>
-            <div class="opacity-50">/</div>
-            <div>{remarkPluginFrontmatter.minutes} {" " + i18n(I18nKey.minutesCount)}</div>
-        </div>
-
     </div>
 
-    {hasCover && <a href={url} aria-label={title}
-                    class:list={["group editorial-post-image",
-                        "max-h-[26vh] md:max-h-none mt-5 md:mt-0",
-                        "md:w-[var(--coverWidth)] relative md:absolute md:top-0 md:bottom-0 md:right-0 active:scale-[0.985]"
-                    ]} >
-        <div class="editorial-post-image-core">
-            <div class="editorial-post-image-echo-layer" aria-hidden="true">
-                <ImageWrapper src={image} basePath={path.join("content/posts/", getDir(entry.id))} alt=""
-                          class="w-full h-full editorial-post-image-echo">
-                </ImageWrapper>
+    {sideCover &&
+        <a href={url} aria-label={title}
+           class="post-card-cover group relative block shrink-0 overflow-hidden h-48 md:h-auto md:w-[15.5rem] lg:w-[17rem]">
+            <ImageWrapper src={image} basePath={basePath} alt={`Cover image of ${title}`}
+                          class="post-card-cover-img w-full h-full"></ImageWrapper>
+            <div class="absolute inset-0 z-10 transition group-hover:bg-black/15 group-active:bg-black/25 pointer-events-none"></div>
+            <div class="absolute inset-0 z-20 flex items-center justify-center opacity-0 transition group-hover:opacity-100 pointer-events-none">
+                <Icon name="material-symbols:arrow-forward-rounded" class="text-white text-4xl"></Icon>
             </div>
-            <div class="absolute pointer-events-none z-10 w-full h-full group-hover:bg-black/20 group-active:bg-black/35 transition"></div>
-            <div class="absolute pointer-events-none z-20 w-full h-full flex items-center justify-center ">
-                <Icon name="material-symbols:chevron-right-rounded"
-                      class="transition opacity-0 group-hover:opacity-100 text-white text-4xl">
-                </Icon>
-            </div>
-            <ImageWrapper src={image} basePath={path.join("content/posts/", getDir(entry.id))} alt="Cover Image of the Post"
-                      class="w-full h-full editorial-post-image-media">
-            </ImageWrapper>
-        </div>
-    </a>}
+        </a>
+    }
 
     {!hasCover &&
-        <a href={url} aria-label={title} class="hidden md:flex btn-regular w-[3.25rem]
-         absolute right-0 top-0 bottom-0 rounded-none bg-transparent
-         hover:bg-[var(--enter-btn-bg-hover)] active:bg-[var(--enter-btn-bg-active)] active:scale-95
-        ">
-            <Icon name="material-symbols:chevron-right-rounded"
-                  class="transition text-[var(--primary)] text-4xl mx-auto">
-            </Icon>
+        <a href={url} aria-label={title}
+           class="post-card-enter hidden md:flex btn-plain shrink-0 w-14 items-center justify-center rounded-none active:scale-95">
+            <Icon name="material-symbols:chevron-right-rounded" class="text-[var(--primary)] text-4xl"></Icon>
         </a>
     }
 </article>
 
-<style lang="stylus" define:vars={{coverWidth}} is:global>
-  .editorial-post-card
-    position: relative
+<style lang="stylus">
+  .post-card
     overflow: hidden
-    padding: 2.5rem 0
-    border-top: 1px solid rgba(0, 0, 0, 0.08)
-    &::before
-      content: ''
-      position: absolute
-      left: 0
-      right: 18%
-      top: 0
-      height: 9rem
-      pointer-events: none
-      background: linear-gradient(180deg, rgba(233, 185, 144, 0.04) 0%, rgba(233, 185, 144, 0.015) 28%, transparent 100%)
-    &:first-child
-      padding-top: 0.25rem
-      border-top: 0
-  .editorial-post-copy
-    position: relative
-    z-index: 2
-    padding-right: 0
-  .editorial-post-image
-    display: block
-    overflow: visible
-    isolation: isolate
-    z-index: 1
-  .editorial-post-image-core
-    position: relative
-    height: 100%
-    overflow: visible
-    border-radius: 0 !important
-    box-shadow: none
-  .editorial-post-image-echo-layer
-    position: absolute
-    inset: 0
-    left: -58%
-    z-index: 0
-    pointer-events: none
-  .editorial-post-image-echo
-    width: 100%
-    height: 100%
-  .editorial-post-image-echo > div:first-child
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease
+    &:hover
+      transform: translateY(-2px)
+  .post-card-title
+    display: -webkit-box
+    -webkit-line-clamp: 3
+    -webkit-box-orient: vertical
+    overflow: hidden
+  .post-card-desc
+    display: -webkit-box
+    -webkit-line-clamp: 2
+    -webkit-box-orient: vertical
+    overflow: hidden
+
+  // --- side thumbnail (default, fills frame — best for photos) ---
+  .post-card-cover
+    background: var(--btn-regular-bg)
+    @media (min-width: 768px)
+      min-height: 12.5rem
+  .post-card-cover :global(img)
+    transition: transform 0.35s ease
+  .post-card:hover .post-card-cover :global(img)
+    transform: scale(1.045)
+
+  // --- full-width figure banner (coverFit: contain — wide diagrams) ---
+  // White panel merges seamlessly with white-background figures; the image keeps
+  // its natural aspect ratio so nothing is cropped or awkwardly shrunk.
+  .post-card-banner
+    background: #ffffff
+    padding: 1rem
+    border-bottom: 1px solid rgba(0, 0, 0, 0.07)
+  .post-card-banner :global(img)
+    height: auto !important
+    max-height: 24rem
+    object-fit: contain
+  .post-card-banner :global(.post-card-banner-img > div)
     display: none
-  .editorial-post-image-echo img
-    width: 100%
-    height: 100%
-    object-fit: cover
-    object-position: center
-    transform: scale(1.08)
-    transform-origin: center center
-    -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.12) 10%, rgba(0, 0, 0, 0.3) 22%, rgba(0, 0, 0, 0.56) 38%, rgba(0, 0, 0, 0.82) 56%, rgba(0, 0, 0, 1) 76%, rgba(0, 0, 0, 1) 100%)
-    mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.12) 10%, rgba(0, 0, 0, 0.3) 22%, rgba(0, 0, 0, 0.56) 38%, rgba(0, 0, 0, 0.82) 56%, rgba(0, 0, 0, 1) 76%, rgba(0, 0, 0, 1) 100%)
-  .editorial-post-image-core .editorial-post-image-media
-    position: relative
-    z-index: 1
-    width: 100%
-    height: 100%
-  .editorial-post-image-core img
-    width: 100%
-    height: 100%
-    object-fit: cover
-    object-position: center
-    border-radius: 0 !important
-  .editorial-post-image-media > div:first-child
-    display: none
-  .editorial-post-image-media img
-    -webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 0.06) 0%, rgba(0, 0, 0, 0.34) 10%, rgba(0, 0, 0, 0.7) 18%, rgba(0, 0, 0, 0.92) 28%, rgba(0, 0, 0, 1) 38%, rgba(0, 0, 0, 1) 100%)
-    mask-image: linear-gradient(to right, rgba(0, 0, 0, 0.06) 0%, rgba(0, 0, 0, 0.34) 10%, rgba(0, 0, 0, 0.7) 18%, rgba(0, 0, 0, 0.92) 28%, rgba(0, 0, 0, 1) 38%, rgba(0, 0, 0, 1) 100%)
-  :root.dark
-    .editorial-post-card
-      border-top-color: rgba(255, 255, 255, 0.08)
-      &::before
-        background: linear-gradient(180deg, rgba(160, 112, 70, 0.035) 0%, rgba(160, 112, 70, 0.012) 32%, transparent 100%)
-  @media (min-width: 768px)
-    .editorial-post-card
-      min-height: 17rem
-    .editorial-post-copy
-      padding-right: 1.75rem
-  @media (max-width: 767px)
-    .editorial-post-card
-      padding: 1.75rem 0
-    .editorial-post-image
-      overflow: hidden
-    .editorial-post-image-core
-      overflow: hidden
-    .editorial-post-image-echo-layer
-      left: 0
+
+  .post-card:hover .post-card-arrow-icon
+    transform: translateX(3px)
 </style>

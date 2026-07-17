@@ -2,8 +2,7 @@
 
 I am Yufan Wei.
 
-I am a first year Ph.D. student at [Center for Wireless Communications](https://cwc.ucsd.edu/) at [University of California, San Diego](https://www.ece.ucsd.edu/), advised by Prof. [Xinyu Zhang](https://xyzhang.ucsd.edu).
- I was a research assistant(RA) at the [UMN Networking Research Group](https://networking.umn.edu/) led by [Prof. Zhi-Li Zhang](https://networking.umn.edu/our-team) @ University of Minnesota. Twin Cities.
+I am a first year Ph.D. student at [University of California, San Diego](https://www.ece.ucsd.edu/), now working with Professor Biwei Huang.
 
 > ### Education
 >
@@ -18,15 +17,15 @@ I am a first year Ph.D. student at [Center for Wireless Communications](https://
 
 > ### Research Interests
 >
-> - Agent-to-Agent Communication
-> - 3D scene reconstruction & generation
-> - Video Compression
-> - Semantic Communication
+> - World Model /World Action Model
+> - Embodied AI
+> - VLA
 > - ...
 
 > ### What's New
 >
-> - Trilled to attend NeurIPS at San Diego!
+> - Jul 2026 — New preprint out: [**CD-LAM: Causally Debiased Latent Action Model**](/posts/cd-lam/) is now on [arXiv](https://arxiv.org/abs/2607.09185)!
+> - Thrilled to attend NeurIPS at San Diego!
 
 
 > ### Research Experience

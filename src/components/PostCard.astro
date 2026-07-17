@@ -17,12 +17,13 @@ interface Props {
     category: string;
     image: string;
     coverFit: 'cover' | 'contain';
+    hideDate: boolean;
     description: string;
     words: number;
     draft: boolean;
     style: string;
 }
-const { entry, title, url, published, tags, category, image, coverFit, description, style } = Astro.props;
+const { entry, title, url, published, tags, category, image, coverFit, hideDate, description, style } = Astro.props;
 const className = Astro.props.class;
 
 const hasCover = image !== undefined && image !== null && image !== '';
@@ -59,7 +60,7 @@ const { remarkPluginFrontmatter } = await entry.render();
             {title}
         </a>
 
-        <PostMetadata published={published} tags={cardTags} category={category} hideTagsForMobile={true} class="mt-3 mb-3.5"></PostMetadata>
+        <PostMetadata published={published} tags={cardTags} category={category} hideTagsForMobile={true} hideDate={hideDate} class="mt-3 mb-3.5"></PostMetadata>
 
         {description && <div class="post-card-desc transition text-75 text-[0.98rem] leading-7">{description}</div>}
 

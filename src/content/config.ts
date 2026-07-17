@@ -11,6 +11,9 @@ const postsCollection = defineCollection({
     // for photos, default) or 'contain' (show the whole image on a panel, best
     // for wide diagrams/figures so nothing is truncated).
     coverFit: z.enum(['cover', 'contain']).optional(),
+    // Hide the published date on the post card and header (still used for
+    // archive ordering). Useful for undated photo sets.
+    hideDate: z.boolean().optional(),
     tags: z.array(z.string()).optional(),
     category: z.string().optional(),
   }),

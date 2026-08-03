@@ -3,8 +3,12 @@ title: iceland
 published: 2025-01-01
 description: 'Trip to Iceland'
 image: './aurora_0.jpg'
-tags: ['Photography', 'Iceland', 'Aurora', 'waterfalls']
+tags: ['Travel', 'Landscape', 'Night Sky']
 category: 'Photography'
+locations:
+  - { name: 'Reykjavík', latitude: 64.1466, longitude: -21.9426 }
+  - { name: 'Vík', latitude: 63.4186, longitude: -19.0060 }
+  - { name: 'Diamond Beach', latitude: 64.0430, longitude: -16.1770 }
 draft: false 
 ---
 # Iceland

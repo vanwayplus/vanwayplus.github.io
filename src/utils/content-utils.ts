@@ -35,16 +35,16 @@ export async function getTagList(): Promise<Tag[]> {
   })
 
   const countMap: { [key: string]: number } = {}
-  allBlogPosts.map(post => {
-    post.data.tags.map((tag: string) => {
+  allBlogPosts.forEach(post => {
+    post.data.tags?.forEach((tag: string) => {
       if (!countMap[tag]) countMap[tag] = 0
       countMap[tag]++
     })
   })
 
-  // sort tags
+  // Surface recurring themes first, then keep equally common tags alphabetical.
   const keys: string[] = Object.keys(countMap).sort((a, b) => {
-    return a.toLowerCase().localeCompare(b.toLowerCase())
+    return countMap[b] - countMap[a] || a.localeCompare(b, 'en', { sensitivity: 'base' })
   })
 
   return keys.map(key => ({ name: key, count: countMap[key] }))

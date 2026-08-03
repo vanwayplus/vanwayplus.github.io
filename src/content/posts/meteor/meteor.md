@@ -3,8 +3,10 @@ title: Galaxy
 published: 2023-12-10
 description: 'Collection of galaxy photos.'
 image: './mango.jpg'
-tags: ['Photography', 'Meteor', 'Galaxy', 'Aurora']
+tags: ['Astrophotography', 'Night Sky']
 category: 'Photography'
+locations:
+  - { name: 'Mongolia', latitude: 46.8625, longitude: 103.8467 }
 draft: false 
 ---
 
@@ -21,4 +23,3 @@ You can also see 2 meteors in the photo.
 ![Aurora](./aurora.jpg)
 ## Milky Way
 ![Milky Way](./milky.jpg)
-

@@ -16,6 +16,11 @@ const postsCollection = defineCollection({
     hideDate: z.boolean().optional(),
     tags: z.array(z.string()).optional(),
     category: z.string().optional(),
+    locations: z.array(z.object({
+      name: z.string(),
+      latitude: z.number().min(-90).max(90),
+      longitude: z.number().min(-180).max(180),
+    })).optional(),
   }),
 })
 export const collections = {

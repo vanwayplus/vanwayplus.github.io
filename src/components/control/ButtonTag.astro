@@ -4,10 +4,12 @@ interface Props {
     dot?: boolean;
     href?: string;
     label?: string;
+    count?: number;
 }
-const { size, dot, href, label }: Props = Astro.props;
+const { size, dot, href, label, count }: Props = Astro.props;
 ---
-<a href={href} aria-label={label} class="inline-flex items-center text-sm py-1 border-b border-black/10 dark:border-white/10 text-black/60 dark:text-white/60 transition hover:text-[var(--primary)] hover:border-[var(--primary)]">
+<a href={href} aria-label={label} class="group inline-flex items-center gap-1.5 rounded-full border border-black/[0.08] bg-black/[0.025] px-2.5 py-1.5 text-xs font-medium text-black/60 transition hover:-translate-y-px hover:border-[var(--primary)] hover:bg-[color-mix(in_srgb,var(--primary)_8%,transparent)] hover:text-[var(--primary)] dark:border-white/10 dark:bg-white/[0.035] dark:text-white/60">
     {dot && <div class="h-1 w-1 bg-[var(--btn-content)] dark:bg-[var(--card-bg)] transition rounded-md mr-2"></div>}
-    <slot></slot>
+    <span><slot></slot></span>
+    {typeof count === 'number' && <span class="min-w-4 rounded-full bg-black/[0.055] px-1 text-center text-[0.63rem] leading-4 text-black/40 transition group-hover:bg-[color-mix(in_srgb,var(--primary)_13%,transparent)] group-hover:text-[var(--primary)] dark:bg-white/[0.07] dark:text-white/40">{count}</span>}
 </a>

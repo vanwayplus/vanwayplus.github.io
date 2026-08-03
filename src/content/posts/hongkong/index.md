@@ -3,8 +3,10 @@ title: Hong Kong
 published: 2023-03-16
 description: 'Photography in Hong Kong'
 image: './taxi1.jpg'
-tags: ['Photography', 'HongKong', 'City']
+tags: ['Cityscape', 'Street Photography']
 category: 'Photography'
+locations:
+  - { name: 'Hong Kong', latitude: 22.3193, longitude: 114.1694 }
 draft: false 
 ---
 

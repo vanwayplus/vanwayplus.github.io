@@ -3,8 +3,11 @@ title: US-395 & Yosemite
 published: 2026-06-15
 description: 'Up the Eastern Sierra on Highway 395, then into Yosemite Valley.'
 image: './PANA297411.jpg'
-tags: ['Photography', 'Yosemite', '395', 'NationalPark']
+tags: ['Landscape', 'Road Trip', 'National Parks']
 category: 'Photography'
+locations:
+  - { name: 'Eastern Sierra', latitude: 37.4636, longitude: -118.7200 }
+  - { name: 'Yosemite', latitude: 37.7459, longitude: -119.5332 }
 draft: false
 hideDate: true
 ---

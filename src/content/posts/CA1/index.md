@@ -3,8 +3,10 @@ title: CA1
 published: 2024-03-07
 description: "Photography along CA-1"
 image: './sea0.jpg'
-tags: ['Photography', 'CA1', 'RoadTrip']
+tags: ['Landscape', 'Road Trip']
 category: 'Photography'
+locations:
+  - { name: 'Big Sur', latitude: 36.2704, longitude: -121.8081 }
 draft: false 
 ---
 

@@ -38,7 +38,7 @@ export const profileConfig: ProfileConfig = {
     {
       name: 'Linkedin',
       icon: 'fa6-brands:linkedin',
-      url: 'www.linkedin.com/in/evan-way',
+      url: 'https://www.linkedin.com/in/evan-way',
     },
   ],
 }

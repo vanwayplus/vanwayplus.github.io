@@ -2,7 +2,7 @@
 title: Towards a Meta-Learning Assisted Universal Neural Receiver-- An Empirical Study
 published: 2024-10-21
 #description: /
-tags: [Communication, Machine Learning, 6G]
+tags: [Wireless Communications, Machine Learning, Neural Receivers]
 image: './main.png'
 category: Research
 draft: false

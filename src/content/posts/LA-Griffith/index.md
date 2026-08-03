@@ -3,8 +3,10 @@ title: 5am at Griffith Observatory
 published: 2025-09-21
 description: 'Griffith Observatory'
 image: './PANA5404(20250923-225301).jpg'
-tags: ['Photography', 'Griffith', 'City']
+tags: ['Night Photography', 'Cityscape']
 category: 'Photography'
+locations:
+  - { name: 'Griffith Observatory', latitude: 34.1184, longitude: -118.3004 }
 draft: false 
 ---
 

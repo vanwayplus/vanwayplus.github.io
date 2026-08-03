@@ -2,7 +2,7 @@
 title: "CD-LAM: Causally Debiased Latent Action Model for Embodied Action Conditioned World Models"
 published: 2026-07-12
 description: "A LAM-side causal debiasing method for continuous latent actions — removing action-irrelevant confounders before world-model training. −42%/−26% action-following error and >12× fewer training updates vs. DreamDojo."
-tags: [World Models, Embodied AI, Latent Action Models, Causal Inference, Robot Learning]
+tags: [World Models, Embodied AI, Causal Learning, Robot Learning]
 image: './method.png'
 coverFit: contain
 category: Research

@@ -3,8 +3,10 @@ title: Los Angeles, by CA-1
 published: 2024-03-07
 description: 'Postcards from Los Angeles, CA-1 road trip.'
 image: './best.jpg'
-tags: ['Photography', 'LA', 'City']
+tags: ['Cityscape', 'Road Trip']
 category: 'Photography'
+locations:
+  - { name: 'Los Angeles', latitude: 34.0195, longitude: -118.4912 }
 draft: false 
 ---
 
@@ -20,5 +22,3 @@ Kind of the best photo from the trip. It could be better if the weather was bett
 ![City](./city0.jpg)
 ## Night City 
 ![City](./city3.jpg)
-
-

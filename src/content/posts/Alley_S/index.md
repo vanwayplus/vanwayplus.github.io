@@ -3,8 +3,13 @@ title: Streets & Alleys around China
 published: 2023-01-10
 description: 'Some alley photos in China.'
 image: './xiamen1.jpg'
-tags: ['Photography', 'street', 'alley']
+tags: ['Street Photography', 'Travel']
 category: 'Photography'
+locations:
+  - { name: 'Huangshan', latitude: 29.7147, longitude: 118.3376 }
+  - { name: 'Changsha', latitude: 28.2282, longitude: 112.9388 }
+  - { name: 'Wuhan', latitude: 30.5928, longitude: 114.3055 }
+  - { name: 'Xiamen', latitude: 24.4798, longitude: 118.0894 }
 draft: false 
 ---
 

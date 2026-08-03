@@ -2,7 +2,7 @@
 title: AllReduce Scheduling with Hierarchical Deep Reinforcement Learning
 published: 2023-01-10
 #description: /
-tags: [Network, Reinforcement Learning, Data Center]
+tags: [Computer Networks, Reinforcement Learning, Systems]
 image: './main.png'
 category: Research
 draft: false

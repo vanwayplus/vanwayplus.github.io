@@ -9,6 +9,7 @@
     "preview": "astro preview",
     "astro": "astro",
     "new-post": "node scripts/new-post.js",
+    "optimize:images": "node scripts/optimize-images.mjs",
     "format": "biome format --write ./src",
     "lint": "biome check --apply ./src"
   },
@@ -22,6 +23,7 @@
     "astro": "^4.4.15",
     "astro-compress": "^2.2.15",
     "astro-icon": "1.1.5",
+    "cobe": "2.0.1",
     "colorjs.io": "^0.5.0",
     "mdast-util-to-string": "^4.0.0",
     "overlayscrollbars": "^2.6.1",

@@ -3,8 +3,10 @@ title: San Francisco City
 published: 2024-01-02
 description: 'San Francisco City'
 image: './bridge0.jpg'
-tags: ['Photography', 'SF', 'City']
+tags: ['Cityscape', 'Travel']
 category: 'Photography'
+locations:
+  - { name: 'San Francisco', latitude: 37.7749, longitude: -122.4194 }
 draft: false 
 ---
 

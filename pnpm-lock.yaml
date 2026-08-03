@@ -32,6 +32,9 @@ dependencies:
   astro-icon:
     specifier: 1.1.5
     version: 1.1.5
+  cobe:
+    specifier: 2.0.1
+    version: 2.0.1
   colorjs.io:
     specifier: ^0.5.0
     version: 0.5.2
@@ -4330,6 +4333,10 @@ packages:
   /clsx@2.1.1:
     resolution: {integrity: sha512-eYm0QWBtUrBWZWG0d386OGAw16Z995PiOVo2B7bjWSbHedGl5e0ZWaq65kOGgUSNesEIDkB9ISbTg/JK9dhCZA==}
     engines: {node: '>=6'}
+    dev: false
+
+  /cobe@2.0.1:
+    resolution: {integrity: sha512-aaa6vcIlaC8C1SF50LDH0Anybo/EAXnrxqe+bwvr4+YUtZydqjeBjTTD7ziCCkbRrRGSns3I3F6cZsf3W+L+ag==}
     dev: false
 
   /code-red@1.0.4:

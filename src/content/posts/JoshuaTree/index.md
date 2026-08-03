@@ -3,8 +3,10 @@ title: Joshua Tree National Park
 published: 2025-06-19
 description: 'Joshua Tree National Park'
 image: './PANA4857.jpg'
-tags: ['Photography', 'Joshua', 'NationalPark']
+tags: ['Astrophotography', 'National Parks', 'Night Sky']
 category: 'Photography'
+locations:
+  - { name: 'Joshua Tree', latitude: 33.8734, longitude: -115.9010 }
 draft: false 
 ---
 

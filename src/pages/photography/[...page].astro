@@ -7,6 +7,8 @@ import Pagination from "../../components/control/Pagination.astro";
 import {getPostsByCategory} from "../../utils/content-utils";
 import {PAGE_SIZE} from "../../constants/constants";
 import PostPage from "../../components/PostPage.astro";
+import PhotoGlobe from "../../components/PhotoGlobe.svelte";
+import {getPostUrlBySlug} from "../../utils/url-utils";
 
 const aboutPost = await getEntry('spec', 'about_p')
 const { Content } = await aboutPost.render()
@@ -19,10 +21,20 @@ export async function getStaticPaths({ paginate }) {
 const {page} = Astro.props;
 
 const len = page.data.length;
+const allPhotoPosts = await getPostsByCategory("Photography");
+const photoStories = allPhotoPosts
+    .filter(post => post.data.locations && post.data.locations.length > 0)
+    .map(post => ({
+        title: post.data.title,
+        url: getPostUrlBySlug(post.slug) ?? '/',
+        locations: post.data.locations,
+    }));
+const showGlobe = page.currentPage === 1;
 
 ---
 
 <MainGridLayout>
+    {showGlobe && <PhotoGlobe stories={photoStories} client:visible />}
     <section class="relative w-full mb-8 pb-6 border-b border-black/10 dark:border-white/10">
         <Markdown class="mt-2">
             <Content />

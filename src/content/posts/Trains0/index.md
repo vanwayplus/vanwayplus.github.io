@@ -3,8 +3,10 @@ title: Trains Special I
 published: 2023-02-09
 description: 'Photography of trains, Collection I'
 image: './cover.jpg'
-tags: ["Photography", "Train"]
+tags: ['Railways', 'Street Photography']
 category: 'Photography'
+locations:
+  - { name: 'China', latitude: 35.8617, longitude: 104.1954 }
 draft: false 
 ---
 # Trains Special I

@@ -3,8 +3,10 @@ title: Chicago
 published: 2024-01-08
 description: "Photography in Chicago"
 image: './night0.jpg'
-tags: ['Photography', 'Chicago', 'City']
+tags: ['Cityscape', 'Travel']
 category: 'Photography'
+locations:
+  - { name: 'Chicago', latitude: 41.8781, longitude: -87.6298 }
 draft: false 
 ---
 

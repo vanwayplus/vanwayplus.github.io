@@ -1,19 +1,10 @@
 # About me
 
-I am Yufan Wei.
+I am Yufan Wei. 
 
-I am a second year Ph.D. student at [University of California, San Diego](https://www.ece.ucsd.edu/), advised by Professor [Biwei Huang](https://biweihuang.com/).
+I am a second year Ph.D. student at [University of California, San Diego](https://www.ece.ucsd.edu/), advised by [Prof. Biwei Huang](https://biweihuang.com/) and working close with [Dr. Kun Zhou](https://lancelot39.github.io/). My research focuses on causal intelligence and embodied ai, with a particular interest in representation level across policy model and world model. 
 
-> ### Education
->
-> - Ph.D. student, [University of California, San Diego](https://www.ece.ucsd.edu/), 2025-2030(hopefully o_O).
-> - B.A., Computer Science, [University of Minnesota, Twin Cities](https://cse.umn.edu/), 2023-2025.
-> - B.S. (transferred), Computer Science, [Beijing University of Posts and Telecommunications](https://www.bupt.edu.cn/), 2020-2023.
-
-> ### Work Experience
->
-> - I've worked at **Aether AI** as an AI Research Intern in summer 2026
-> - I've worked at **Apple Inc.** @Beijing as a Data Analyst Intern in 2023
+I obtained my Bachelor's degree in Computer Science at University of Minnesota while spend my first 2 years at Beijing University of Posts and Telecommunications.
 
 > ### Research Interests
 >
@@ -32,14 +23,16 @@ I am a second year Ph.D. student at [University of California, San Diego](https:
 
 > ### Research Experience
 >
-> - I've worked with Prof. [Xinyu Zhang](https://xyzhang.ucsd.edu) as a visiting student @[UCSD](https://www.ece.ucsd.edu/) at summer 2024.
-> - I've worked with Prof. [Zhi-Li Zhang](https://cse.umn.edu/cs/zhi-li-zhang) as an undergrad RA @[UMN](https://cse.umn.edu/) from 2023 to 2025.
-> - I've worked with Prof. [Wenfei Wu](https://wenfei-wu.github.io) as a Research Assistant at [Peking University](https://english.pku.edu.cn/) from 2022 to 2023.
-> - I've been an intern advised by Prof. [Yuanchun Li](https://yuanchun-li.github.io/) at [AIR](https://air.tsinghua.edu.cn/en/)@[Tsinghua University](https://www.tsinghua.edu.cn/en/) in 2022. 
+> I've been honored to work with:
+> - Prof. [Xinyu Zhang](https://xyzhang.ucsd.edu) as a visiting student @[UCSD](https://www.ece.ucsd.edu/) at summer 2024.
+> - Prof. [Zhi-Li Zhang](https://cse.umn.edu/cs/zhi-li-zhang) as an undergrad RA @[UMN](https://cse.umn.edu/) from 2023 to 2025.
+> - Prof. [Wenfei Wu](https://wenfei-wu.github.io) as a Research Assistant at [Peking University](https://english.pku.edu.cn/) from 2022 to 2023.
+> - Prof. [Yuanchun Li](https://yuanchun-li.github.io/) at [AIR](https://air.tsinghua.edu.cn/en/)@[Tsinghua University](https://www.tsinghua.edu.cn/en/) in 2022. 
 
-> ### Service
+> ### Work Experience
 >
-> - I'm a reviewer for NeurIPS' workshop: NeuroIPS 2025.
+> - I've worked at **Aether AI** as an AI Research Intern in summer 2026
+> - I've worked at **Apple Inc.** @Beijing as a Data Analyst Intern in 2023
 
 
 

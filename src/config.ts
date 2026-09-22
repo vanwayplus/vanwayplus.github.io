@@ -26,7 +26,7 @@ export const navBarConfig: NavBarConfig = {
 }
 
 export const profileConfig: ProfileConfig = {
-  avatar: 'assets/000002.jpg',
+  avatar: 'assets/avatar.jpg',
   name: 'Yufan(Evan) Wei',
   bio: '運氣來的若有似無',
   links: [

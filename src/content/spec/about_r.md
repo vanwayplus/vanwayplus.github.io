@@ -2,29 +2,31 @@
 
 I am Yufan Wei.
 
-I am a first year Ph.D. student at [University of California, San Diego](https://www.ece.ucsd.edu/), now working with Professor Biwei Huang.
+I am a second year Ph.D. student at [University of California, San Diego](https://www.ece.ucsd.edu/), advised by Professor [Biwei Huang](https://biweihuang.com/).
 
 > ### Education
 >
 > - Ph.D. student, [University of California, San Diego](https://www.ece.ucsd.edu/), 2025-2030(hopefully o_O).
 > - B.A., Computer Science, [University of Minnesota, Twin Cities](https://cse.umn.edu/), 2023-2025.
-<!-- > - B.S.(transferred), Computer Science, Beijing University of Posts and Telecom, 2020-2023. -->
-<!-- > - Transferred from [BUPT](https://www.bupt.edu.cn/#) in 2023. -->
+> - B.S. (transferred), Computer Science, [Beijing University of Posts and Telecommunications](https://www.bupt.edu.cn/), 2020-2023.
 
 > ### Work Experience
 >
+> - I've worked at **Aether AI** as an AI Research Intern in summer 2026
 > - I've worked at **Apple Inc.** @Beijing as a Data Analyst Intern in 2023
 
 > ### Research Interests
 >
-> - World Model /World Action Model
-> - Embodied AI
-> - VLA
+> - World Model / Representation Learning
+> - Embodied AI / VLA
+> - Causal AI
 > - ...
 
 > ### What's New
 >
+> - Sep 2026 — New preprint out: [**CausalWM: Causal Chain-of-Thought Reasoning for Embodied World Model**](/posts/causalwm/) ([arXiv](https://arxiv.org/abs/2609.23184) · [Project Page](https://aetherlabsai.github.io/CausalWM/)) — congrats to the team on achieving #1 on the TriWorldBench leaderboard!
 > - Jul 2026 — New preprint out: [**CD-LAM: Causally Debiased Latent Action Model**](/posts/cd-lam/) is now on [arXiv](https://arxiv.org/abs/2607.09185)!
+> - Jul 2026 — Attended ACL at San Diego!
 > - Thrilled to attend NeurIPS at San Diego!
 
 

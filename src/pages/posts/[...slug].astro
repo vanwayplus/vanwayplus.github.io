@@ -6,6 +6,7 @@ import PostMetadata from "../../components/PostMeta.astro";
 import {i18n} from "@i18n/translation";
 import I18nKey from "@i18n/i18nKey";
 import {getPostUrlBySlug} from "@utils/url-utils";
+import AuthorList from "@components/AuthorList.astro";
 import License from "@components/misc/License.astro";
 import {licenseConfig} from "src/config";
 import Markdown from "@components/misc/Markdown.astro";
@@ -24,6 +25,10 @@ const { Content } = await entry.render();
 const { remarkPluginFrontmatter } = await entry.render();
 const description = entry.data.description?.trim();
 const showDescription = description && description.toLowerCase() !== entry.data.title.trim().toLowerCase();
+const authors = entry.data.authors ?? [];
+const titleText = entry.data.title.trim();
+const titleLen = titleText.length;
+const titleClass = titleLen > 55 ? "post-title post-title--xl" : titleLen > 32 ? "post-title post-title--lg" : "post-title";
 
 ---
 <MainGridLayout banner={entry.data.image} title={entry.data.title}>
@@ -33,10 +38,11 @@ const showDescription = description && description.toLowerCase() !== entry.data.
                 <div class="post-eyebrow">{entry.data.category || "Story"}</div>
                 <h1
                     data-pagefind-body data-pagefind-weight="10" data-pagefind-meta="title"
-                    class="post-title"
+                    class={titleClass}
                 >
                     {entry.data.title}
                 </h1>
+                {authors.length > 0 && <AuthorList authors={authors} class="post-authors" />}
                 {showDescription && <p class="post-dek">{description}</p>}
                 <div class="post-facts">
                     <div class="post-fact">
@@ -160,7 +166,19 @@ html.dark .post-shell::after {
     font-size: clamp(2.35rem, 7vw, 4.9rem);
     line-height: 0.94;
     letter-spacing: -0.05em;
+    text-wrap: balance;
     color: rgba(15, 14, 12, 0.92);
+}
+.post-title--lg {
+    max-width: 24ch;
+    font-size: clamp(1.9rem, 5.2vw, 3.5rem);
+    line-height: 1.04;
+}
+.post-title--xl {
+    max-width: 32ch;
+    font-size: clamp(1.6rem, 4vw, 2.6rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
 }
 :root.dark .post-title {
     color: rgba(248, 245, 240, 0.94);
@@ -174,6 +192,19 @@ html.dark .post-shell::after {
 }
 :root.dark .post-dek {
     color: rgba(236, 232, 226, 0.66);
+}
+.post-authors {
+    margin: 1.15rem 0 0;
+    max-width: 42rem;
+    font-size: 0.98rem;
+    line-height: 1.85;
+    color: rgba(44, 37, 31, 0.7);
+}
+:root.dark .post-authors {
+    color: rgba(236, 232, 226, 0.7);
+}
+.post-authors strong {
+    font-weight: 700;
 }
 .post-facts {
     display: flex;
@@ -274,5 +305,39 @@ html.dark .license-container {
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 2rem;
     }
+}
+#post-container .paper-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin: 1.15rem 0 0;
+}
+#post-container .paper-links a {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.4rem 1.05rem;
+    border: 1px solid rgba(26, 22, 18, 0.18);
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: rgba(44, 37, 31, 0.78);
+    text-decoration: none;
+    background: transparent;
+    transition: color 150ms ease, border-color 150ms ease, background 150ms ease;
+}
+#post-container .paper-links a:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    background: rgba(210, 126, 71, 0.07);
+}
+html.dark #post-container .paper-links a {
+    border-color: rgba(255, 255, 255, 0.18);
+    color: rgba(236, 232, 226, 0.85);
+}
+html.dark #post-container .paper-links a:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    background: rgba(214, 148, 86, 0.1);
 }
 </style>

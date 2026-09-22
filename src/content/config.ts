@@ -16,6 +16,9 @@ const postsCollection = defineCollection({
     hideDate: z.boolean().optional(),
     tags: z.array(z.string()).optional(),
     category: z.string().optional(),
+    // Author list rendered under the post title (e.g. for paper posts).
+    // The site owner's name is rendered in bold automatically.
+    authors: z.array(z.string()).optional(),
     locations: z.array(z.object({
       name: z.string(),
       latitude: z.number().min(-90).max(90),

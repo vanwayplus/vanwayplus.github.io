@@ -5,6 +5,7 @@ published: 2024-10-21
 tags: [Wireless Communications, Machine Learning, Neural Receivers]
 image: './main.png'
 category: Research
+authors: [Yufan Wei, Wei Ye, Steven Sleder, Zhi-Li Zhang]
 draft: false
 ---
 Now available on IEEE:

@@ -1,0 +1,20 @@
+---
+// Renders a comma-separated author list; the site owner's name is bolded.
+interface Props {
+    authors: string[];
+    class?: string;
+}
+const { authors, class: className } = Astro.props;
+// Names rendered in bold inside the author list (the site owner, incl. alias).
+const ownerNames = ["Yufan Wei", "Evan Wei"];
+const isOwner = (name: string) =>
+    ownerNames.some((owner) => name.trim().toLowerCase() === owner.toLowerCase());
+---
+<p class:list={["author-list", className]}>
+    {authors.map((author, i) => (
+        <>
+            {isOwner(author) ? <strong>{author}</strong> : author}
+            {i < authors.length - 1 ? ", " : ""}
+        </>
+    ))}
+</p>

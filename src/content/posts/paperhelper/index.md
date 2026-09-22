@@ -5,6 +5,7 @@ published: 2024-10-10
 tags: [NLP]
 image: './main.png'
 category: Research
+authors: [Congrui Yin, Evan Wei, Zhongxing Zhang, Zaifu Zhan]
 draft: true
 ---
 Now available on Arxiv:

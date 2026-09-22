@@ -28,7 +28,7 @@ export const navBarConfig: NavBarConfig = {
 export const profileConfig: ProfileConfig = {
   avatar: 'assets/000002.jpg',
   name: 'Yufan(Evan) Wei',
-  bio: 'Easy come, easy go. | 运气来的若有似无',
+  bio: '運氣來的若有似無',
   links: [
     {
       name: 'Mail',
@@ -39,6 +39,11 @@ export const profileConfig: ProfileConfig = {
       name: 'Linkedin',
       icon: 'fa6-brands:linkedin',
       url: 'https://www.linkedin.com/in/evan-way',
+    },
+    {
+      name: 'Scholar',
+      icon: 'fa6-solid:graduation-cap',
+      url: 'https://scholar.google.com/citations?user=082Jf5IAAAAJ&hl=zh-CN',
     },
   ],
 }

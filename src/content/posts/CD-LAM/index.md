@@ -6,6 +6,7 @@ tags: [World Models, Embodied AI, Causal Learning, Robot Learning]
 image: './method.png'
 coverFit: contain
 category: Research
+authors: [Yufan Wei, Kun Zhou, Lingjun Mao, Zijun Zhang, Ziming Xu, Ziqiao Xi, Shuang Liang, Ruobing Han, Yuchen Yan, Xinyue Wang, Fan Feng, Biwei Huang]
 draft: false
 ---
 

@@ -55,12 +55,19 @@ if (title) {
 		<link rel="icon" media="(prefers-color-scheme: dark)"  href="/favicon/favicon-dark-180.png" sizes="180x180">
 		<link rel="icon" media="(prefers-color-scheme: dark)"  href="/favicon/favicon-dark-192.png" sizes="192x192">
 
-		<link rel="stylesheet" href="https://cdn.staticfile.org/KaTeX/0.16.9/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
 
 		<style define:vars={{ configHue }}></style>  <!-- defines global css variables. This will be applied to <html> <body> and some other elements idk why -->
 
 	</head>
 	<body class=" min-h-screen transition " class:list={[{"is-home": isHomePage, "enable-banner": enableBanner}]}>
+		<div id="ambient-bg" aria-hidden="true">
+			<div class="ambient-orb ambient-orb-1"></div>
+			<div class="ambient-orb ambient-orb-2"></div>
+			<div class="ambient-orb ambient-orb-3"></div>
+			<div class="ambient-orb ambient-orb-4"></div>
+			<div class="ambient-grain"></div>
+		</div>
 		<ConfigCarrier></ConfigCarrier>
 		<GlobalStyles>
 		<div id="banner-wrapper" class="absolute w-full">
@@ -85,92 +92,122 @@ if (title) {
 		font-family: var(--font-display);
 	}
 	body {
-		background:
-			linear-gradient(180deg, oklch(0.988 0.006 calc(var(--hue) + 45)) 0%, oklch(0.968 0.010 calc(var(--hue) + 30)) 100%);
-		color: oklch(0.28 0.02 calc(var(--hue) + 8));
+		background: linear-gradient(130deg, #dde4ee 0%, #eae8e4 46%, #dde7f0 100%);
+		color: oklch(0.22 0.015 calc(var(--hue) + 8));
 	}
 	:root.dark body {
-		background:
-			linear-gradient(180deg, oklch(0.17 0.01 calc(var(--hue) + 12)) 0%, oklch(0.13 0.01 calc(var(--hue) + 4)) 100%);
-		color: rgba(246, 243, 238, 0.88);
+		background: linear-gradient(135deg, #090b10 0%, #10141c 50%, #0b0e14 100%);
+		color: rgba(246, 244, 240, 0.92);
 	}
-	body::before {
-		content: '';
+	#ambient-bg {
 		position: fixed;
 		inset: 0;
 		z-index: -1;
+		overflow: hidden;
 		pointer-events: none;
-		background:
-			radial-gradient(ellipse 78% 56% at 8% -6%, oklch(0.92 0.04 calc(var(--hue) + 4)) 0%, transparent 72%),
-			radial-gradient(ellipse 52% 40% at 100% 18%, oklch(0.96 0.02 220) 0%, transparent 76%);
 	}
-	:root.dark body::before {
-		background:
-			radial-gradient(ellipse 78% 56% at 8% -6%, oklch(0.30 0.05 calc(var(--hue) + 4)) 0%, transparent 70%),
-			radial-gradient(ellipse 52% 40% at 100% 18%, oklch(0.26 0.03 220) 0%, transparent 78%);
+	.ambient-orb {
+		position: absolute;
+		border-radius: 42% 58% 64% 36% / 48% 38% 62% 52%;
+		filter: blur(58px);
+		will-change: transform;
+		opacity: 0.88;
+		transition: opacity 0.4s ease;
 	}
-	body::after {
-		content: '';
-		position: fixed;
-		left: 0;
-		right: 0;
-		top: 0;
-		height: min(26rem, 42vh);
-		z-index: -1;
-		pointer-events: none;
-		background:
-			linear-gradient(180deg, rgba(194, 141, 96, 0.15) 0%, rgba(194, 141, 96, 0.09) 28%, transparent 82%),
-			radial-gradient(80% 58% at 18% 0%, rgba(255, 244, 230, 0.45) 0%, transparent 76%),
-			radial-gradient(55% 42% at 82% 0%, rgba(255, 228, 205, 0.18) 0%, transparent 78%);
-		opacity: 0.9;
+	.ambient-orb-1 {
+		width: min(66vw, 56rem);
+		height: min(44vw, 36rem);
+		top: -8%;
+		left: -6%;
+		background: linear-gradient(125deg, oklch(0.76 0.12 232) 0%, oklch(0.81 0.07 210) 56%, transparent 92%);
+		animation: ambient-drift-1 26s ease-in-out infinite alternate;
 	}
-	:root.dark body::after {
-		background:
-			linear-gradient(180deg, rgba(210, 145, 86, 0.10) 0%, rgba(210, 145, 86, 0.04) 32%, transparent 82%),
-			radial-gradient(80% 58% at 18% 0%, rgba(55, 43, 33, 0.45) 0%, transparent 74%),
-			radial-gradient(55% 42% at 82% 0%, rgba(58, 44, 34, 0.18) 0%, transparent 78%);
-		opacity: 0.95;
+	.ambient-orb-2 {
+		width: min(62vw, 52rem);
+		height: min(46vw, 38rem);
+		top: 2%;
+		right: -8%;
+		background: linear-gradient(215deg, oklch(0.79 0.13 55) 0%, oklch(0.84 0.08 72) 56%, transparent 92%);
+		animation: ambient-drift-2 30s ease-in-out infinite alternate;
 	}
-	html[pathname^='/posts/'] body {
-		background:
-			linear-gradient(180deg, oklch(0.997 0.002 calc(var(--hue) + 48)) 0%, oklch(0.988 0.004 calc(var(--hue) + 42)) 100%);
+	.ambient-orb-3 {
+		width: min(58vw, 50rem);
+		height: min(42vw, 36rem);
+		bottom: -8%;
+		left: 10%;
+		background: linear-gradient(55deg, oklch(0.78 0.09 198) 0%, oklch(0.82 0.06 235) 56%, transparent 90%);
+		animation: ambient-drift-3 34s ease-in-out infinite alternate;
 	}
-	html[pathname^='/posts/'] body::before {
-		background:
-			radial-gradient(ellipse 76% 54% at 8% -6%, rgba(255, 255, 255, 0.96) 0%, transparent 70%),
-			radial-gradient(ellipse 44% 34% at 100% 18%, rgba(252, 247, 241, 0.72) 0%, transparent 76%);
+	.ambient-orb-4 {
+		width: min(56vw, 48rem);
+		height: min(42vw, 36rem);
+		bottom: -6%;
+		right: 4%;
+		background: linear-gradient(315deg, oklch(0.78 0.12 42) 0%, oklch(0.83 0.07 60) 55%, transparent 90%);
+		animation: ambient-drift-4 28s ease-in-out infinite alternate;
 	}
-	html[pathname^='/posts/'] body::after {
-		background:
-			linear-gradient(180deg, rgba(194, 141, 96, 0.07) 0%, rgba(194, 141, 96, 0.02) 24%, transparent 76%);
-		opacity: 0.6;
-	}
-	html.dark[pathname^='/posts/'] body {
-		background:
-			linear-gradient(180deg, oklch(0.16 0.01 calc(var(--hue) + 12)) 0%, oklch(0.12 0.01 calc(var(--hue) + 6)) 100%);
-	}
-	html.dark[pathname^='/posts/'] body::before {
-		background:
-			radial-gradient(ellipse 76% 54% at 8% -6%, rgba(38, 31, 24, 0.42) 0%, transparent 70%),
-			radial-gradient(ellipse 44% 34% at 100% 18%, rgba(34, 28, 24, 0.2) 0%, transparent 76%);
-	}
-	html.dark[pathname^='/posts/'] body::after {
-		background:
-			linear-gradient(180deg, rgba(210, 145, 86, 0.06) 0%, rgba(210, 145, 86, 0.02) 24%, transparent 76%);
+	:root.dark .ambient-orb {
 		opacity: 0.72;
+		filter: blur(68px);
+	}
+	:root.dark .ambient-orb-1 {
+		background: linear-gradient(125deg, oklch(0.46 0.14 235) 0%, oklch(0.36 0.10 215) 56%, transparent 92%);
+	}
+	:root.dark .ambient-orb-2 {
+		background: linear-gradient(215deg, oklch(0.52 0.16 48) 0%, oklch(0.40 0.11 62) 56%, transparent 92%);
+	}
+	:root.dark .ambient-orb-3 {
+		background: linear-gradient(55deg, oklch(0.40 0.12 205) 0%, oklch(0.34 0.09 240) 56%, transparent 90%);
+	}
+	:root.dark .ambient-orb-4 {
+		background: linear-gradient(315deg, oklch(0.48 0.15 40) 0%, oklch(0.38 0.10 55) 55%, transparent 90%);
+	}
+	.ambient-grain {
+		position: absolute;
+		inset: 0;
+		opacity: 0.055;
+		mix-blend-mode: overlay;
+		background-repeat: repeat;
+		background-size: 160px 160px;
+		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+	}
+	:root.dark .ambient-grain {
+		opacity: 0.075;
+	}
+	html[pathname^='/posts/'] .ambient-orb {
+		opacity: 0.72;
+	}
+	html.dark[pathname^='/posts/'] .ambient-orb {
+		opacity: 0.60;
+	}
+	@keyframes ambient-drift-1 {
+		0% { transform: translate3d(0, 0, 0) scale(1) rotate(0deg); }
+		100% { transform: translate3d(6vw, 4vh, 0) scale(1.08) rotate(8deg); }
+	}
+	@keyframes ambient-drift-2 {
+		0% { transform: translate3d(0, 0, 0) scale(1) rotate(0deg); }
+		100% { transform: translate3d(-5vw, 6vh, 0) scale(1.06) rotate(-7deg); }
+	}
+	@keyframes ambient-drift-3 {
+		0% { transform: translate3d(0, 0, 0) scale(1) rotate(0deg); }
+		100% { transform: translate3d(5vw, -5vh, 0) scale(1.1) rotate(6deg); }
+	}
+	@keyframes ambient-drift-4 {
+		0% { transform: translate3d(0, 0, 0) scale(1) rotate(0deg); }
+		100% { transform: translate3d(-6vw, -4vh, 0) scale(1.07) rotate(-8deg); }
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.ambient-orb {
+			animation: none !important;
+		}
 	}
 </style>
 <style is:global>
-@tailwind components;
-@tailwind utilities;
-
-@layer components {
-	.enable-banner #banner-wrapper {
-		@apply h-[var(--banner-height)]
-	}
-	.enable-banner #top-row {
-		@apply h-[calc(var(--banner-height)_-_4.5rem)]
-	}
+.enable-banner #banner-wrapper {
+	height: var(--banner-height);
+}
+.enable-banner #top-row {
+	height: calc(var(--banner-height) - 4.5rem);
 }
 </style>
 <script>
@@ -181,17 +218,17 @@ import {getHue, setHue} from "../utils/setting-utils";
 function setClickOutsideToClose(panel: string, ignores: string[]) {
 	document.addEventListener("click", event => {
 		let panelDom = document.getElementById(panel);
-		let tDom = event.target;
+		if (!panelDom) return;
+		let tDom = event.target as Node | null;
 		for (let ig of ignores) {
 			let ie = document.getElementById(ig)
-			if (ie == tDom || (ie?.contains(tDom))) {
+			if (ie == tDom || (tDom && ie?.contains(tDom))) {
 				return;
 			}
 		}
 		panelDom.classList.add("closed");
 	});
 }
-setClickOutsideToClose("display-setting", ["display-setting", "display-settings-switch"])
 setClickOutsideToClose("nav-menu-panel", ["nav-menu-panel", "nav-menu-switch"])
 setClickOutsideToClose("search-panel", ["search-panel", "search-bar", "search-switch"])
 
@@ -251,8 +288,39 @@ function initCustomScrollbar() {
 	});
 }
 
-function init() {
+function syncPageState() {
+	const pathname = window.location.pathname;
+	const isHome = pathname === '/' || pathname === '';
+	document.documentElement.setAttribute('pathname', pathname);
+	if (isHome) {
+		document.documentElement.setAttribute('isHome', '');
+		document.body.classList.add('is-home');
+	} else {
+		document.documentElement.removeAttribute('isHome');
+		document.body.classList.remove('is-home');
+	}
+	const travelGlobe = document.getElementById('sidebar-travel-globe');
+	if (travelGlobe) {
+		travelGlobe.classList.toggle('hidden', !isHome);
+	}
 	setBannerHeight();
+}
+
+function initCodeScrollbars() {
+	document.querySelectorAll('pre').forEach((ele) => {
+		OverlayScrollbars(ele, {
+			scrollbars: {
+				theme: 'scrollbar-base scrollbar-dark px-2',
+				autoHide: 'leave',
+				autoHideDelay: 500,
+				autoHideSuspend: false
+			}
+		});
+	});
+}
+
+function init() {
+	syncPageState();
 	loadTheme();
 	loadHue();
 	initCustomScrollbar();
@@ -261,8 +329,7 @@ function init() {
 /* Load settings when entering the site */
 init();
 
-/* Load settings before swapping */
-/* astro:after-swap event happened before swap animation */
+/* Keep Swup client-side navigations in sync */
 document.addEventListener('astro:after-swap', init);
 
 const setup = () => {
@@ -270,8 +337,12 @@ const setup = () => {
 	window.swup.hooks.on('link:click', () => {
 		document.documentElement.style.setProperty('--content-delay', '0ms')
 	})
+	window.swup.hooks.on('page:view', () => {
+		syncPageState();
+		initCodeScrollbars();
+	})
 }
-if (window.swup.hooks) {
+if (window?.swup?.hooks) {
 	setup()
 } else {
 	document.addEventListener('swup:enable', setup)

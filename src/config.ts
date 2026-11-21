@@ -36,6 +36,11 @@ export const profileConfig: ProfileConfig = {
       url: 'mailto:littlevanplus@gmail.com',
     },
     {
+      name: 'GitHub',
+      icon: 'fa6-brands:github',
+      url: 'https://github.com/vanwayplus',
+    },
+    {
       name: 'Linkedin',
       icon: 'fa6-brands:linkedin',
       url: 'https://www.linkedin.com/in/evan-way',

@@ -70,10 +70,16 @@ const { remarkPluginFrontmatter } = await entry.render();
 
         {description && <div class="post-card-desc transition text-75 text-[0.98rem] leading-7">{description}</div>}
 
-        <div class="post-card-footer mt-4 flex items-center gap-3 text-xs tracking-[0.08em] uppercase text-30">
-            <span>{remarkPluginFrontmatter.words} {i18n(I18nKey.wordsCount)}</span>
+        <div class="post-card-footer mt-4 flex items-center gap-3 text-xs tracking-[0.08em] uppercase text-50">
+            <span class="inline-flex items-center gap-1">
+                <Icon name="material-symbols:notes-rounded" size={14} class="text-[var(--primary)] opacity-85" />
+                {remarkPluginFrontmatter.words} {i18n(I18nKey.wordsCount)}
+            </span>
             <span class="opacity-40">/</span>
-            <span>{remarkPluginFrontmatter.minutes} {i18n(I18nKey.minutesCount)}</span>
+            <span class="inline-flex items-center gap-1">
+                <Icon name="material-symbols:schedule-outline-rounded" size={14} class="text-[var(--primary)] opacity-85" />
+                {remarkPluginFrontmatter.minutes} {i18n(I18nKey.minutesCount)}
+            </span>
             <span class="post-card-readmore ml-auto hidden md:inline-flex items-center gap-1 text-[var(--primary)] font-semibold normal-case tracking-normal text-sm">
                 Read
                 <Icon name="material-symbols:arrow-forward-rounded" size={17} class="post-card-arrow-icon transition"></Icon>
@@ -104,9 +110,11 @@ const { remarkPluginFrontmatter } = await entry.render();
 <style lang="stylus">
   .post-card
     overflow: hidden
-    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease
+    transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease
     &:hover
       transform: translateY(-2px)
+      border-color: unquote("color-mix(in srgb, var(--primary) 34%, transparent)")
+      box-shadow: var(--glass-highlight), var(--glass-shadow-hover)
   .post-card-title
     display: -webkit-box
     -webkit-line-clamp: 3

@@ -6,9 +6,9 @@ import {profileConfig} from "../../config";
 const config = profileConfig;
 ---
 <div class="card-base">
-    <a aria-label="Go to About Page" href="/about"
+    <a aria-label="Go to Home Page" href="/"
        class="group block relative mx-auto mt-4 lg:mx-4 lg:mt-4 mb-4
-       max-w-[220px] lg:max-w-none overflow-hidden rounded-[1.1rem] active:scale-[0.985]">
+       max-w-[220px] lg:max-w-none overflow-hidden rounded-[0.6rem] active:scale-[0.985]">
         <div class="absolute transition pointer-events-none group-hover:bg-black/20 group-active:bg-black/35
         w-full h-full z-50 flex items-center justify-center">
             <Icon name="fa6-regular:address-card"
@@ -23,8 +23,8 @@ const config = profileConfig;
         <div class="text-center text-black/50 dark:text-white/50 mb-4 transition leading-7">{config.bio}</div>
         <div class="flex gap-2 mx-2 justify-center">
         {config.links.map(item =>
-            <a aria-label={item.name} href={item.url} target="_blank" class="btn-regular rounded-xl h-11 w-11 active:scale-90">
-                <Icon name={item.icon} size="1.5rem"></Icon>
+            <a aria-label={item.name} href={item.url} target="_blank" class="btn-regular rounded-lg h-10 w-10 active:scale-90">
+                <Icon name={item.icon} size="1.35rem"></Icon>
             </a>
         )}
         </div>

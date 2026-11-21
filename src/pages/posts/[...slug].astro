@@ -1,5 +1,5 @@
 ---
-import { getCollection } from 'astro:content';
+import { getSortedPosts } from '@utils/content-utils';
 import MainGridLayout from "@layouts/MainGridLayout.astro";
 import {Icon} from "astro-icon/components";
 import PostMetadata from "../../components/PostMeta.astro";
@@ -12,9 +12,7 @@ import {licenseConfig} from "src/config";
 import Markdown from "@components/misc/Markdown.astro";
 
 export async function getStaticPaths() {
-    const blogEntries = await getCollection('posts', ({ data }) => {
-        return import.meta.env.PROD ? data.draft !== true : true;
-    });
+    const blogEntries = await getSortedPosts();
     return blogEntries.map(entry => ({
         params: { slug: entry.slug }, props: { entry },
     }));
@@ -74,25 +72,25 @@ const titleClass = titleLen > 55 ? "post-title post-title--xl" : titleLen > 32 ?
     </article>
 
     <div class="post-pagination">
-        <a href={getPostUrlBySlug(entry.data.nextSlug)} class="post-pagination-link post-pagination-prev">
-            {entry.data.nextSlug && <>
+        {entry.data.nextSlug ? (
+            <a href={getPostUrlBySlug(entry.data.nextSlug)} class="post-pagination-link card-base post-pagination-prev">
                 <div class="post-pagination-label">Previous</div>
                 <div class="post-pagination-title">
-                    <Icon name="material-symbols:chevron-left-rounded" size={28} class="text-[var(--primary)]" />
+                    <Icon name="material-symbols:chevron-left-rounded" size={26} class="text-[var(--primary)] shrink-0" />
                     <span>{entry.data.nextTitle}</span>
                 </div>
-            </>}
-        </a>
+            </a>
+        ) : <div aria-hidden="true"></div>}
 
-        <a href={getPostUrlBySlug(entry.data.prevSlug)} class="post-pagination-link post-pagination-next">
-            {entry.data.prevSlug && <>
-                <div class="post-pagination-label">Next</div>
+        {entry.data.prevSlug ? (
+            <a href={getPostUrlBySlug(entry.data.prevSlug)} class="post-pagination-link card-base post-pagination-next">
+                <div class="post-pagination-label text-right">Next</div>
                 <div class="post-pagination-title">
                     <span>{entry.data.prevTitle}</span>
-                    <Icon name="material-symbols:chevron-right-rounded" size={28} class="text-[var(--primary)]" />
+                    <Icon name="material-symbols:chevron-right-rounded" size={26} class="text-[var(--primary)] shrink-0" />
                 </div>
-            </>}
-        </a>
+            </a>
+        ) : <div aria-hidden="true"></div>}
     </div>
 
 </MainGridLayout>
@@ -101,10 +99,12 @@ const titleClass = titleLen > 55 ? "post-title post-title--xl" : titleLen > 32 ?
 .post-shell {
     position: relative;
     overflow: hidden;
-    background: rgba(255, 255, 255, 0.96);
-    border: 1px solid rgba(26, 22, 18, 0.08);
-    border-radius: 0;
-    box-shadow: 0 24px 72px rgba(26, 22, 18, 0.05);
+    background: var(--glass-bg-strong);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border-outer);
+    border-radius: var(--radius-large);
+    box-shadow: var(--glass-highlight), var(--glass-shadow);
 }
 .post-shell::before {
     content: "";
@@ -113,26 +113,16 @@ const titleClass = titleLen > 55 ? "post-title post-title--xl" : titleLen > 32 ?
     top: clamp(1.55rem, 3vw, 2.4rem);
     width: clamp(3.5rem, 8vw, 5rem);
     height: 0.22rem;
-    background: linear-gradient(90deg, rgba(210, 126, 71, 0.96) 0%, rgba(210, 126, 71, 0.25) 74%, rgba(210, 126, 71, 0) 100%);
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--primary) 0%, color-mix(in srgb, var(--primary) 25%, transparent) 74%, transparent 100%);
     pointer-events: none;
 }
 .post-shell::after {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgba(210, 126, 71, 0.025) 0%, rgba(255, 255, 255, 0) 18%);
+    background: linear-gradient(180deg, color-mix(in srgb, var(--primary) 4%, transparent) 0%, transparent 18%);
     pointer-events: none;
-}
-html.dark .post-shell {
-    background: rgba(18, 21, 25, 0.92);
-    border-color: rgba(255, 255, 255, 0.08);
-    box-shadow: 0 26px 76px rgba(0, 0, 0, 0.26);
-}
-html.dark .post-shell::before {
-    background: linear-gradient(90deg, rgba(214, 148, 86, 0.92) 0%, rgba(214, 148, 86, 0.22) 74%, rgba(214, 148, 86, 0) 100%);
-}
-html.dark .post-shell::after {
-    background: linear-gradient(180deg, rgba(214, 148, 86, 0.04) 0%, rgba(18, 21, 25, 0) 22%);
 }
 .post-shell-inner {
     position: relative;
@@ -248,15 +238,20 @@ html.dark .license-container {
 }
 .post-pagination {
     display: grid;
-    gap: 1.25rem;
+    gap: 1rem;
     margin-bottom: 1rem;
-    padding-top: 0.5rem;
+    padding-top: 0.25rem;
 }
 .post-pagination-link {
     display: block;
     min-height: 4.5rem;
-    padding-top: 1rem;
-    border-top: 1px solid rgba(129, 98, 66, 0.12);
+    padding: 1rem 1.25rem;
+    transition: transform 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
+}
+.post-pagination-link:hover {
+    transform: translateY(-2px);
+    border-color: color-mix(in srgb, var(--primary) 35%, transparent);
+    box-shadow: var(--glass-highlight), var(--glass-shadow-hover);
 }
 .post-pagination-label {
     margin-bottom: 0.45rem;

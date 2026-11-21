@@ -5,6 +5,7 @@ import I18nKey from "../../i18n/i18nKey";
 interface Props {
     id: string;
     name?: string;
+    icon?: string;
     isCollapsed?: boolean;
     collapsedHeight?: string;
     class?: string;
@@ -14,6 +15,7 @@ const props = Astro.props;
 const {
     id,
     name,
+    icon,
     isCollapsed,
     collapsedHeight,
     style,
@@ -21,15 +23,18 @@ const {
 const className = Astro.props.class
 
 ---
-<widget-layout data-id={id} data-is-collapsed={isCollapsed} class={"widget-section " + className} style={style}>
-    <div class="widget-section-title">{name}</div>
+<widget-layout data-id={id} data-is-collapsed={isCollapsed} class={"card-base widget-section " + className} style={style}>
+    <div class="widget-section-title">
+        {icon && <Icon name={icon} size="1.05rem" class="text-[var(--primary)] shrink-0" />}
+        <span>{name}</span>
+    </div>
     <div id={id} class:list={["collapse-wrapper overflow-hidden", {"collapsed": isCollapsed}]}>
         <slot></slot>
     </div>
     {isCollapsed && <div class="expand-btn pt-3">
-        <button class="btn-plain h-9">
-            <div class="text-[var(--primary)] flex items-center gap-2">
-                <Icon name="material-symbols:more-horiz" size={28}></Icon> {i18n(I18nKey.more)}
+        <button class="btn-plain h-9 px-3 rounded-xl">
+            <div class="text-[var(--primary)] flex items-center gap-2 text-sm font-medium">
+                <Icon name="material-symbols:more-horiz" size={24}></Icon> {i18n(I18nKey.more)}
             </div>
         </button>
     </div>}
@@ -44,17 +49,15 @@ const className = Astro.props.class
 <style is:global>
 widget-layout.widget-section {
     display: block;
-    padding-top: 1rem;
-    padding-bottom: 1.5rem;
-    border-top: 1px solid rgba(0, 0, 0, 0.08);
-}
-:root.dark widget-layout.widget-section {
-    border-top-color: rgba(255, 255, 255, 0.08);
+    padding: 1.15rem 1.25rem 1.25rem;
 }
 .widget-section-title {
-    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    margin-bottom: 0.85rem;
     color: rgba(26, 22, 18, 0.86);
-    font-size: 0.76rem;
+    font-size: 0.74rem;
     font-weight: 700;
     letter-spacing: 0.18em;
     text-transform: uppercase;

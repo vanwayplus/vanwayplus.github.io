@@ -12,8 +12,8 @@ const showMap = Astro.url.pathname === "/";
         <Profile></Profile>
     </div>
     <div class="flex flex-col w-full gap-4 sticky top-24">
-        {showMap && <div class="travel-globe-shell onload-animation" style="animation-delay: 150ms">
-            <a class="travel-globe-card" href="/photography" aria-label="Explore photography from around the world">
+        <div id="sidebar-travel-globe" class:list={["onload-animation", { "hidden": !showMap }]} style="animation-delay: 150ms">
+            <a class="travel-globe-card card-base" href="/photography" aria-label="Explore photography from around the world">
                 <div class="travel-globe-visual" aria-hidden="true">
                     <span class="travel-orbit"></span>
                     <Icon name="material-symbols:public" class="travel-globe-icon"></Icon>
@@ -28,38 +28,27 @@ const showMap = Astro.url.pathname === "/";
                 </div>
                 <Icon name="material-symbols:arrow-outward-rounded" class="travel-globe-arrow"></Icon>
             </a>
-        </div>}
+        </div>
         <Categories class="onload-animation" style={`animation-delay: ${showMap ? 200 : 150}ms`}></Categories>
         <Tag class="onload-animation" style={`animation-delay: ${showMap ? 250 : 200}ms`}></Tag>
     </div>
 </div>
 
 <style>
-    .travel-globe-shell {
-        padding-top: 1rem;
-        padding-bottom: 0.25rem;
-        border-top: 1px solid rgba(0, 0, 0, 0.08);
-    }
-
     .travel-globe-card {
         position: relative;
         display: flex;
         align-items: center;
         gap: 0.85rem;
-        overflow: hidden;
-        min-height: 8.75rem;
+        min-height: 8.5rem;
         padding: 1rem;
-        background: linear-gradient(180deg, rgba(255, 250, 244, 0.96), rgba(255, 255, 255, 0.88));
-        border: 1px solid rgba(138, 119, 104, 0.10);
-        border-radius: 1rem;
-        box-shadow: 0 12px 28px rgba(83, 60, 38, 0.05);
-        transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+        transition: transform 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
     }
 
     .travel-globe-card:hover {
         transform: translateY(-2px);
-        border-color: color-mix(in srgb, var(--primary) 28%, transparent);
-        box-shadow: 0 16px 34px rgba(83, 60, 38, 0.10);
+        border-color: color-mix(in srgb, var(--primary) 35%, transparent);
+        box-shadow: var(--glass-highlight), var(--glass-shadow-hover);
     }
 
     .travel-globe-visual {
@@ -155,18 +144,8 @@ const showMap = Astro.url.pathname === "/";
         transform: translate(1px, -1px);
     }
 
-    :root.dark .travel-globe-shell {
-        border-top-color: rgba(255, 255, 255, 0.08);
-    }
-
-    :root.dark .travel-globe-card {
-        background: linear-gradient(180deg, rgba(39, 34, 29, 0.92), rgba(28, 24, 21, 0.88));
-        border-color: rgba(255, 255, 255, 0.08);
-        box-shadow: 0 14px 32px rgba(0, 0, 0, 0.20);
-    }
-
     :root.dark .travel-globe-visual {
-        background: color-mix(in srgb, var(--primary) 14%, #171411);
+        background: color-mix(in srgb, var(--primary) 16%, rgba(20, 18, 16, 0.65));
     }
 
     :root.dark .travel-pin {

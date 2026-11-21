@@ -224,14 +224,15 @@
     display: grid;
     grid-template-columns: minmax(0, 0.88fr) minmax(19rem, 1.12fr);
     min-height: 31rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
     overflow: hidden;
+    border-radius: var(--radius-large);
     color: rgba(26, 22, 18, 0.9);
-    background:
-      radial-gradient(circle at 78% 48%, color-mix(in srgb, var(--primary) 10%, transparent), transparent 37%),
-      linear-gradient(135deg, rgba(255, 252, 248, 0.98), rgba(248, 241, 233, 0.9));
-    border: 1px solid rgba(107, 82, 60, 0.12);
-    box-shadow: 0 26px 70px rgba(74, 49, 28, 0.08);
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border-outer);
+    box-shadow: var(--glass-highlight), var(--glass-shadow);
   }
 
   .photo-atlas::before {
@@ -286,9 +287,13 @@
     gap: 0.12rem 1rem;
     max-width: 29rem;
     padding: 0.9rem 1rem;
-    background: rgba(255, 255, 255, 0.55);
-    border: 1px solid rgba(116, 87, 61, 0.12);
+    border-radius: 0.85rem;
+    background: var(--glass-bg-subtle);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border-outer);
     border-left: 3px solid var(--primary);
+    box-shadow: var(--glass-highlight);
   }
 
   .selected-story > span {
@@ -335,8 +340,12 @@
     margin-top: 1.15rem;
     gap: 0.4rem;
     overflow-x: auto;
-    padding: 0.1rem 0 0.45rem;
-    scrollbar-width: thin;
+    padding: 0.1rem 0 0.25rem;
+    scrollbar-width: none;
+  }
+
+  .story-list::-webkit-scrollbar {
+    display: none;
   }
 
   .story-list button {
@@ -442,11 +451,6 @@
 
   :global(:root.dark) .photo-atlas {
     color: rgba(246, 241, 236, 0.9);
-    background:
-      radial-gradient(circle at 78% 48%, color-mix(in srgb, var(--primary) 11%, transparent), transparent 39%),
-      linear-gradient(135deg, rgba(35, 31, 27, 0.98), rgba(21, 19, 17, 0.97));
-    border-color: rgba(255, 255, 255, 0.09);
-    box-shadow: 0 28px 74px rgba(0, 0, 0, 0.26);
   }
 
   :global(:root.dark) .photo-atlas::before {

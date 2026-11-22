@@ -11,11 +11,11 @@ export const LinkPresets: { [key in LinkPreset]: NavBarLink } = {
   [LinkPreset.Photography]: {
     name: i18n(I18nKey.about),
     url: '/photography',
-    icon: 'material-symbols:photo-camera-outline-rounded',
+    icon: 'fa6-solid:camera',
   },
   [LinkPreset.Archive]: {
     name: i18n(I18nKey.archive),
     url: '/archive',
-    icon: 'material-symbols:inventory-2-outline-rounded',
+    icon: 'fa6-solid:box-archive',
   },
 }
